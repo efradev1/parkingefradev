@@ -21,6 +21,7 @@ public class VistaReservaActivity extends AppCompatActivity {
     protected Button boton4;
     protected Button boton5;
     protected Button boton6;
+    protected Button boton7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
