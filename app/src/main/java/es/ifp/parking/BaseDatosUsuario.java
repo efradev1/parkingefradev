@@ -24,11 +24,9 @@ public class BaseDatosUsuario extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS usuario");
-
     }
 
     public void insertUsuario(String nombre, String apellido,  String email, String telefono, String cp, String marcaC, String modeloC, String matricula ,String password){
-
         db=this.getReadableDatabase();
         db.execSQL("INSERT INTO usuario(nombre, apellido, email, telefono,  cp, marcaC, modeloC, matricula, password) VALUES ('"+nombre+"','"+apellido+"','"+email+"','"+telefono+"','"+cp+"','"+marcaC+"','"+modeloC+"','"+matricula+"','"+password+"')");
         db.close();
@@ -128,9 +126,7 @@ public class BaseDatosUsuario extends SQLiteOpenHelper {
                 );
                 credencialesVemail=true;
             }
-
             }
         return credencialesVemail;
     }
-
 }
