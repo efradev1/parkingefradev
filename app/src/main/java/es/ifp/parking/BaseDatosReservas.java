@@ -6,30 +6,30 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-public class BaseDatosVentas extends SQLiteOpenHelper {
+//EN REFORMAS
+public class BaseDatosReservas extends SQLiteOpenHelper {
 
     protected SQLiteDatabase db;
 
 
-    public BaseDatosVentas(Context context) {
+    public BaseDatosReservas(Context context) {
 
-        super(context,"Ventas", null, 1);
+        super(context,"Reservas", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE table venta(id_venta integer primary key autoincrement not null,id_usuario integer, fecha text,hora text, latitud real, longitud real, detalles text, FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario))");
+        db.execSQL("CREATE table reserva(id_reserva integer primary key autoincrement not null,id_usuario integer, fecha text,hora text, latitud real, longitud real, detalles text, FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario))");
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS venta");
+        db.execSQL("DROP TABLE IF EXISTS reserva");
 
     }
 
-    public void insertVenta(int id_usuario, String fecha, String hora, double latitud, double longitud, String detalles){
+    public void insertReserva(int id_usuario, String fecha, String hora, double latitud, double longitud, String detalles){
 
         db=this.getReadableDatabase();
         db.execSQL("INSERT INTO venta(id_usuario, fecha, hora, latitud, longitud, detalles) " +
@@ -37,16 +37,16 @@ public class BaseDatosVentas extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deleteVenta(int id_venta){
+    public void deleteReserva(int id_reserva){
         db=this.getWritableDatabase();
-        db.execSQL("DELETE FROM venta WHERE id_venta=" +id_venta);
+        db.execSQL("DELETE FROM venta WHERE id_venta=" +id_reserva);
         db.close();
     }
-    public int numVentas(){
+    public int numReservas(){
 
         int num=0;
         db=this.getReadableDatabase();
-        num=(int) DatabaseUtils.queryNumEntries(db,"venta");
+        num=(int) DatabaseUtils.queryNumEntries(db,"reserva");
         return num;
 
     }
