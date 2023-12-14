@@ -19,7 +19,7 @@ public class BaseDatosUsuario extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE table usuario(id integer primary key autoincrement not null, nombre text,apellido text, email text, telefono text,cp text, marcaC text, modeloC text, matricula text, password text)");
+        db.execSQL("CREATE table usuario(id_usuario integer primary key autoincrement not null, nombre text,apellido text, email text, telefono text,cp text, marcaC text, modeloC text, matricula text, password text)");
     }
 
     @Override
