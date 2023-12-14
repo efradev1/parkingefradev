@@ -38,6 +38,7 @@ public class VenderActivity extends AppCompatActivity {
     private static final String longitud_key="longitud";
     private static final String PREFS_NAME = "Mi_Venta";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +53,8 @@ public class VenderActivity extends AppCompatActivity {
 
         mapController = mapView.getController();
         mapController.setZoom(15.0);
+
+
 
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -214,6 +217,10 @@ public class VenderActivity extends AppCompatActivity {
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+    private int obtenerIdUsuario(String email, String password) {
+
+        return 1; // Reemplaza esto con tu lógica real
     }
 
 }

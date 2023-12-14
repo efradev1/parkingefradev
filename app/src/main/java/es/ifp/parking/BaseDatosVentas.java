@@ -29,54 +29,54 @@ public class BaseDatosVentas extends SQLiteOpenHelper {
 
     }
 
-    public void insertVenta(String nombre, String apellido,  String email, String telefono, String cp, String marcaC, String modeloC, String matricula ,String password){
+    public void insertVenta(int id_usuario, String fecha, String hora, double latitud, double longitud, String detalles){
 
         db=this.getReadableDatabase();
-        db.execSQL("INSERT INTO usuario(nombre, apellido, email, telefono,  cp, marcaC, modeloC, matricula, password) VALUES ('"+nombre+"','"+apellido+"','"+email+"','"+telefono+"','"+cp+"','"+marcaC+"','"+modeloC+"','"+matricula+"','"+password+"')");
+        db.execSQL("INSERT INTO venta(id_usuario, fecha, hora, latitud, longitud, detalles) " +
+                "VALUES (" + id_usuario + ",'" + fecha + "','" + hora + "'," + latitud + "," + longitud + ",'" + detalles + "')");
         db.close();
     }
 
-    public void deleteUsuario(String email){
+    public void deleteVenta(int id_venta){
         db=this.getWritableDatabase();
-        db.execSQL("DELETE FROM usuario WHERE email=" +email);
+        db.execSQL("DELETE FROM venta WHERE id_venta=" +id_venta);
         db.close();
     }
-    public int numUsuarios(){
+    public int numVentas(){
 
         int num=0;
         db=this.getReadableDatabase();
-        num=(int) DatabaseUtils.queryNumEntries(db,"usuario");
+        num=(int) DatabaseUtils.queryNumEntries(db,"venta");
         return num;
 
     }
 
     @SuppressLint("Range")
-    public UnUsuario getUsuario(String email, String password){
-        UnUsuario u= null;
+    public UnaVenta getUsuario(int id_venta){
+        UnaVenta v= null;
         Cursor res= null;
         db= this.getReadableDatabase();
-        if(numUsuarios()>0) {
-            res = db.rawQuery("SELECT * FROM usuario WHERE email= ?", new String[]{email});
+        if(numVentas()>0) {
+            res = db.rawQuery("SELECT * FROM venta WHERE id_venta= ?", new String[]{String.valueOf(id_venta)});
             if (res.moveToFirst()) {
-                @SuppressLint("Range") String storedPass = res.getString(res.getColumnIndex("password"));
-                if (storedPass.equals(password)) {
-                    u = new UnUsuario(
-                            res.getString(res.getColumnIndex("nombre")),
-                            res.getString(res.getColumnIndex("apellido")),
-                            res.getString(res.getColumnIndex("email")),
-                            res.getString(res.getColumnIndex("telefono")),
-                            res.getString(res.getColumnIndex("cp")),
-                            res.getString(res.getColumnIndex("marcaC")),
-                            res.getString(res.getColumnIndex("modeloC")),
-                            res.getString(res.getColumnIndex("matricula")),
-                            storedPass
+                @SuppressLint("Range") int storedidv = res.getInt(res.getColumnIndex("id_venta"));
+                if (storedidv==(id_venta)) {
+                    v = new UnaVenta(
+                            storedidv,
+                            res.getInt(res.getColumnIndex("id_usuario")),
+                            res.getString(res.getColumnIndex("fecha")),
+                            res.getString(res.getColumnIndex("hora")),
+                            res.getDouble(res.getColumnIndex("latitud")),
+                            res.getDouble(res.getColumnIndex("longitud")),
+                            res.getString(res.getColumnIndex("detalles"))
+
                     );
                 }
 
             }
         }
         res.close();
-        return u;
+        return v;
     }
 
 }

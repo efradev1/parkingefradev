@@ -2,7 +2,9 @@ package es.ifp.parking;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -122,6 +124,13 @@ public class RegistroUsuario extends AppCompatActivity {
                     if(!existe){
                         db.insertUsuario(contenidoNombre,contenidoApellido,contenidoEmail,contenidoTelefono,contenidoCP,contenidoMarcaC,contenidoModeloC,contenidoMatricula,contenidoPas);
                         Toast.makeText(RegistroUsuario.this,"Registro realizado", Toast.LENGTH_LONG).show();
+
+                        SharedPreferences preferences = getSharedPreferences("usuario_info", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor= preferences.edit();
+                        editor.putString("email",contenidoEmail);
+                        editor.putString("password",contenidoPas);
+                        editor.apply();
+
                         Intent pasarPantalla = new Intent(RegistroUsuario.this, InicioSesionActivity.class);
                         finish();
                         startActivity(pasarPantalla);

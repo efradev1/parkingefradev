@@ -3,12 +3,15 @@ package es.ifp.parking;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.osmdroid.util.GeoPoint;
 
@@ -33,6 +36,9 @@ public class DetallesVentaActivity extends AppCompatActivity {
     private String contenidoDetalles="";
 
     protected BaseDatosVentas db;
+    protected BaseDatosUsuario bd;
+
+
 
 
 
@@ -49,6 +55,9 @@ public class DetallesVentaActivity extends AppCompatActivity {
         volver=findViewById(R.id.botonVolver_DetallesVentaActivity);
         guardar=findViewById(R.id.botonGuardar_DetallesVentanaActivity);
         db= new BaseDatosVentas(this );
+        bd= new BaseDatosUsuario(this);
+
+
 
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,8 +96,13 @@ public class DetallesVentaActivity extends AppCompatActivity {
         builder.setMessage("¿Está seguro?");
         builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-
-                Intent pasarPantalla = new Intent(DetallesVentaActivity.this, MisVentasActivity.class);
+                SharedPreferences preferences = getSharedPreferences("usuario_info", Context.MODE_PRIVATE);
+                String email= preferences.getString("email","");
+                String password=preferences.getString("password","");
+                int id_usuario= bd.obtenerIdUsuario(email,password);
+                db.insertVenta(id_usuario,contenidoFecha,contenidoHora,contenidoLatitud,contenidoLongitud,contenidoDetalles);
+                Toast.makeText(DetallesVentaActivity.this,"Plaza anunciada", Toast.LENGTH_LONG).show();
+                Intent pasarPantalla = new Intent(DetallesVentaActivity.this, MisReservasActivity.class);
                 finish();
                 startActivity(pasarPantalla);
 

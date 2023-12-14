@@ -133,5 +133,30 @@ public class BaseDatosUsuario extends SQLiteOpenHelper {
         }
         return credencialesVemail;
     }
+    @SuppressLint("Range")
+    public int obtenerIdUsuario(String email, String password) {
+        int idUsuario = -1;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+
+        try {
+            // Consulta para obtener el ID de usuario
+            String query = "SELECT id_usuario FROM usuario WHERE email = ? AND password = ?";
+            cursor = db.rawQuery(query, new String[]{email, password});
+
+            // Verificar si se encontró un usuario
+            if (cursor.moveToFirst()) {
+                idUsuario = cursor.getInt(cursor.getColumnIndex("id_usuario"));
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        return idUsuario;
+    }
+
 
 }
