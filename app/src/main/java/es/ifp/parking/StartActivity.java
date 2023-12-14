@@ -50,3 +50,4 @@ public class StartActivity extends AppCompatActivity {
 }
 
 //hola hola
+//más sabe el perro sanxe por perro que por sanxe
