@@ -74,10 +74,10 @@ public class InicioSesionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                    Toast.makeText(InicioSesionActivity.this, "Registro", Toast.LENGTH_SHORT).show();
-                    Intent pasarPantalla= new Intent(InicioSesionActivity.this, RegistroUsuario.class);
-                    finish();
-                    startActivity(pasarPantalla);
+                Toast.makeText(InicioSesionActivity.this, "Registro", Toast.LENGTH_SHORT).show();
+                Intent pasarPantalla= new Intent(InicioSesionActivity.this, RegistroUsuario.class);
+                finish();
+                startActivity(pasarPantalla);
 
             }
         });

@@ -11,6 +11,7 @@ public class BaseDatosUsuario extends SQLiteOpenHelper {
 
     protected SQLiteDatabase db;
 
+
     public BaseDatosUsuario(Context context) {
 
         super(context,"Usuario", null, 1);
@@ -24,9 +25,11 @@ public class BaseDatosUsuario extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS usuario");
+
     }
 
     public void insertUsuario(String nombre, String apellido,  String email, String telefono, String cp, String marcaC, String modeloC, String matricula ,String password){
+
         db=this.getReadableDatabase();
         db.execSQL("INSERT INTO usuario(nombre, apellido, email, telefono,  cp, marcaC, modeloC, matricula, password) VALUES ('"+nombre+"','"+apellido+"','"+email+"','"+telefono+"','"+cp+"','"+marcaC+"','"+modeloC+"','"+matricula+"','"+password+"')");
         db.close();
@@ -100,7 +103,7 @@ public class BaseDatosUsuario extends SQLiteOpenHelper {
                 }
             }
         }
-        res.close();
+
         return credencialesV;
     }
     @SuppressLint("Range")
@@ -109,7 +112,7 @@ public class BaseDatosUsuario extends SQLiteOpenHelper {
         boolean credencialesVemail= false;
         Cursor res= null;
         db= this.getReadableDatabase();
-        if(numUsuarios()>0) {
+        if(numUsuarios()>=0) {
             res = db.rawQuery("SELECT * FROM usuario WHERE email= ?", new String[]{email});
             if(res.moveToFirst()){
                 u = new UnUsuario(
@@ -126,7 +129,9 @@ public class BaseDatosUsuario extends SQLiteOpenHelper {
                 );
                 credencialesVemail=true;
             }
-            }
+
+        }
         return credencialesVemail;
     }
+
 }

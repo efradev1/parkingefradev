@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Connection;
+
 public class RegistroUsuario extends AppCompatActivity {
 
     protected EditText editTextNombre;
@@ -62,7 +64,7 @@ public class RegistroUsuario extends AppCompatActivity {
         registroTitulo=(TextView) findViewById(R.id.textView_Registro_RegistroUsuario);
         registrarse=(Button) findViewById(R.id.botonRegistro_RegistroUsuario);
         volver=(Button) findViewById(R.id.botonVolver_RegistroUsuario);
-        db= new BaseDatosUsuario(this);
+        db= new BaseDatosUsuario(this );
 
         registrarse.setOnClickListener(new View.OnClickListener() {
             @Override

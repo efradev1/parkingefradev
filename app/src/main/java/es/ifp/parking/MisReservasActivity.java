@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 
 public class MisReservasActivity extends AppCompatActivity {
@@ -27,7 +28,7 @@ public class MisReservasActivity extends AppCompatActivity {
     protected ArrayList<String> listadoReservas = new ArrayList<String>();
     protected ArrayList<String> listadoVentas = new ArrayList<String>();
     protected ArrayAdapter<String> adaptador;
-    private BaseDatosUsuario db;
+    protected BaseDatosUsuario db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class MisReservasActivity extends AppCompatActivity {
         listaR = (ListView) findViewById(R.id.list_reservas);
         listaV = (ListView) findViewById(R.id.list_ventas);
 
-        db = new BaseDatosUsuario(this);
+        db= new BaseDatosUsuario(this );
 
         //listado1 = db.get...
         //listado2 = db.get...

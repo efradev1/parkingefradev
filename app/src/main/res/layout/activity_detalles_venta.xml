@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetallesVentaActivity">
+
+    <TextView
+        android:id="@+id/label_Titulo_DetallesVentaActivity"
+        android:layout_width="418dp"
+        android:layout_height="119dp"
+        android:background="#F1D886"
+        android:gravity="center"
+        android:text="Detalles"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="413dp"
+        android:layout_height="582dp"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_Titulo_DetallesVentaActivity">
+
+        <TextView
+            android:id="@+id/label_PreguntaDia_DetallesVentaActivity"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="#F1D886"
+            android:text="¿Para qué día vende su plaza?"
+            android:textAlignment="center"
+            android:textColor="#050505"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editTextDate_PreguntaDia_DetallesVentaActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="date"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/label_PreguntaHora_DetallesVentaActivity"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:background="#F1D886"
+            android:text="¿A qué hora dejará el aparcamiento?"
+            android:textAlignment="center"
+            android:textColor="#050505"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editTextTime_Hora_DetallesVentaActivity"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:ems="10"
+            android:inputType="time"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/label_latitud_DetallesVentaActivity"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#F1D886"
+            android:text="Latitud"
+            android:textAlignment="center"
+            android:textColor="#050505"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editText_Latitud_DetallesVentaActivity"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/label_longitud_DetallesVentaActivity"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:background="#F1D886"
+            android:text="Longitud"
+            android:textAlignment="center"
+            android:textColor="#050505"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editText_Longitud_DetallesVentaActivity"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/label_Detalles_DetallesVentaActivity"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:background="#F1D886"
+            android:text="¿Algo más que se deba saber?"
+            android:textAlignment="center"
+            android:textColor="#050505"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editText_Detalles_DetallesVentaActivity"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/botonGuardar_DetallesVentanaActivity"
+        android:layout_width="156dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="12dp"
+        android:background="#028CCA"
+        android:text="Guardar"
+        app:backgroundTint="#028CCA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <Button
+        android:id="@+id/botonVolver_DetallesVentaActivity"
+        android:layout_width="165dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="12dp"
+        android:background="#028CCA"
+        android:text="Volver"
+        app:backgroundTint="#028CCA"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="769dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

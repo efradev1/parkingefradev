@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Connection;
+
 public class OlvidoUsuarioActivity extends AppCompatActivity {
 
     protected TextView labelOlvido;
@@ -32,7 +34,7 @@ public class OlvidoUsuarioActivity extends AppCompatActivity {
         botonVolver=(Button) findViewById(R.id.boton_Volver_OlvidoUsuario);
         botonEnviar=(Button) findViewById(R.id.boton_Enviar_OlvidoUsuario);
         cajaEmail=(EditText) findViewById(R.id.editTextEmail_OlvidoUsuario);
-        db= new BaseDatosUsuario(this);
+        db= new BaseDatosUsuario(this );
 
         botonVolver.setOnClickListener(new View.OnClickListener() {
             @Override

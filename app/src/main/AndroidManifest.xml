@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -19,9 +18,14 @@
         android:theme="@style/Theme.ParKing"
         tools:targetApi="31">
         <activity
+            android:name=".DetallesVentaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".VenderActivity"
+            android:exported="false" />
+        <activity
             android:name=".BuscarActivity"
             android:exported="false" />
-
         <activity
             android:name=".MenuUsuarioActivity"
             android:exported="false" />

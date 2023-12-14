@@ -5,17 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E4FFC107"
-    tools:context=".BuscarActivity">
+    tools:context=".VenderActivity">
 
     <org.osmdroid.views.MapView
-        android:id="@+id/mapView_BuscarActivity"
+        android:id="@+id/mapView_VenderActivity"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
         android:layout_marginBottom="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,35 +21,33 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/botonInicio_BuscarActivity"
+        android:id="@+id/botonSiguiente_VenderActivity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
         android:layout_marginTop="32dp"
-        android:text="Inicio"
+        android:text="Siguiente"
         app:backgroundTint="#000000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mapView_VenderActivity" />
 
     <Button
-        android:id="@+id/botonVolver_BuscarActivity"
+        android:id="@+id/botonVolver_VenderActivity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
         android:text="Volver"
         app:backgroundTint="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mapView_VenderActivity" />
 
     <TextView
-        android:id="@+id/titulo_BuscarActivity"
+        android:id="@+id/titulo_VenderActivity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="BUSCAR"
+        android:text="VENDER"
         android:textColor="#000000"
         android:textSize="34sp"
         android:textStyle="bold"
