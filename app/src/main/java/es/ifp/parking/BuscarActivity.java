@@ -3,6 +3,7 @@ package es.ifp.parking;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -13,14 +14,18 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
+
+import java.util.List;
 
 public class BuscarActivity extends AppCompatActivity {
 
@@ -31,6 +36,7 @@ public class BuscarActivity extends AppCompatActivity {
     private MyLocationNewOverlay myLocationOverlay;
     private Button botonVolver;
     private Button botonInicio;
+    private BaseDatosVentas bdv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +44,9 @@ public class BuscarActivity extends AppCompatActivity {
         Configuration.getInstance().load(this, getPreferences(MODE_PRIVATE));
         setContentView(R.layout.activity_buscar);
 
-        botonVolver=findViewById(R.id.botonVolver_BuscarActivity);
-        botonInicio=findViewById(R.id.botonInicio_BuscarActivity);
+        bdv = new BaseDatosVentas(this);
+        botonVolver = findViewById(R.id.botonVolver_BuscarActivity);
+        botonInicio = findViewById(R.id.botonInicio_BuscarActivity);
         mapView = findViewById(R.id.mapView_BuscarActivity);
         mapView.setTileSource(TileSourceFactory.MAPNIK);
         mapView.setBuiltInZoomControls(true);
@@ -57,6 +64,7 @@ public class BuscarActivity extends AppCompatActivity {
 
         } else {
             setupLocationManager();
+            mostrarPlazasEnVentaMapa();
         }
         botonVolver.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,6 +131,28 @@ public class BuscarActivity extends AppCompatActivity {
         }
     }
 
+    private void mostrarPlazasEnVentaMapa() {
+        List<UnaVenta> ventas = bdv.obtenerTodasLasVentas();
+
+        if (myLocationOverlay != null && myLocationOverlay.getMyLocation() != null) {
+            GeoPoint miUbicacion = myLocationOverlay.getMyLocation();
+            Marker marcadorUsuario = new Marker(mapView);
+            marcadorUsuario.setPosition(miUbicacion);
+            marcadorUsuario.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+            mapView.getOverlays().add(marcadorUsuario);
+        }
+
+        for (UnaVenta venta : ventas) {
+            GeoPoint puntoVenta = new GeoPoint(venta.getLatitud(), venta.getLongitud());
+            Marker marcadorV = new Marker(mapView);
+            marcadorV.setPosition(puntoVenta);
+            marcadorV.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+            mapView.getOverlays().add(marcadorV);
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -171,6 +201,4 @@ public class BuscarActivity extends AppCompatActivity {
             myLocationOverlay.disableFollowLocation();
         }
     }
-
-
 }

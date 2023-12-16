@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,6 +57,15 @@ public class DetallesVentaActivity extends AppCompatActivity {
         guardar=findViewById(R.id.botonGuardar_DetallesVentanaActivity);
         db= new BaseDatosVentas(this );
         bd= new BaseDatosUsuario(this);
+        Intent intent= getIntent();
+        if(intent != null){
+            double latitud= intent.getDoubleExtra("latitud",0.0);
+            double longitud=intent.getDoubleExtra("longitud",0.0);
+            contenidoLatitud= latitud;
+            contenidoLongitud= longitud;
+            latitudEditText.setText(String.valueOf(latitud));
+            longitudEditText.setText(String.valueOf(longitud));
+        }
 
 
 
@@ -66,13 +76,6 @@ public class DetallesVentaActivity extends AppCompatActivity {
                 contenidoFecha=fechaEditText.getText().toString();
                 contenidoHora=horaEditText.getText().toString();
                 contenidoDetalles=detallesEditText.getText().toString();
-                Intent intent= getIntent();
-                if(intent != null){
-                    double latitud= intent.getDoubleExtra("latitud",0.0);
-                    double longitud=intent.getDoubleExtra("longitud",0.0);
-                    latitudEditText.setText(String.valueOf(latitud));
-                    longitudEditText.setText(String.valueOf(longitud));
-                }
                 mostrarDialogoConfirmacion();
 
             }
@@ -101,7 +104,11 @@ public class DetallesVentaActivity extends AppCompatActivity {
                 String password=preferences.getString("password","");
                 int id_usuario= bd.obtenerIdUsuario(email,password);
                 db.insertVenta(id_usuario,contenidoFecha,contenidoHora,contenidoLatitud,contenidoLongitud,contenidoDetalles);
-                Toast.makeText(DetallesVentaActivity.this,"Plaza anunciada", Toast.LENGTH_LONG).show();
+                Toast toast= Toast.makeText(DetallesVentaActivity.this,"Tu plaza ha sido registrada con éxito." +
+                        "Puede ver los detalles en Mis Reservas.",Toast.LENGTH_LONG);
+                         toast.setGravity(Gravity.CENTER,0,0);
+                         toast.show();
+
                 Intent pasarPantalla = new Intent(DetallesVentaActivity.this, MisReservasActivity.class);
                 finish();
                 startActivity(pasarPantalla);

@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-//EN REFORMAS
+
 public class BaseDatosReservas extends SQLiteOpenHelper {
 
     protected SQLiteDatabase db;
@@ -52,17 +52,17 @@ public class BaseDatosReservas extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
-    public UnaVenta getUsuario(int id_venta){
-        UnaVenta v= null;
+    public UnaReserva getReserva(int id_reserva){
+        UnaReserva r= null;
         Cursor res= null;
         db= this.getReadableDatabase();
-        if(numVentas()>0) {
-            res = db.rawQuery("SELECT * FROM venta WHERE id_venta= ?", new String[]{String.valueOf(id_venta)});
+        if(numReservas()>0) {
+            res = db.rawQuery("SELECT * FROM reserva WHERE id_reserva= ?", new String[]{String.valueOf(id_reserva)});
             if (res.moveToFirst()) {
-                @SuppressLint("Range") int storedidv = res.getInt(res.getColumnIndex("id_venta"));
-                if (storedidv==(id_venta)) {
-                    v = new UnaVenta(
-                            storedidv,
+                @SuppressLint("Range") int storedidr = res.getInt(res.getColumnIndex("id_reserva"));
+                if (storedidr==(id_reserva)) {
+                    r = new UnaReserva(
+                            storedidr,
                             res.getInt(res.getColumnIndex("id_usuario")),
                             res.getString(res.getColumnIndex("fecha")),
                             res.getString(res.getColumnIndex("hora")),
@@ -76,7 +76,7 @@ public class BaseDatosReservas extends SQLiteOpenHelper {
             }
         }
         res.close();
-        return v;
+        return r;
     }
 
 }

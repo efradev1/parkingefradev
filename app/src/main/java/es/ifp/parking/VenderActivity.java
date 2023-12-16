@@ -90,11 +90,14 @@ public class VenderActivity extends AppCompatActivity {
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
             @Override
-            public void onLocationChanged(@NonNull Location location) {
+            public void onLocationChanged(Location location) {
+
                 updateLocationMarker(new GeoPoint(location.getLatitude(), location.getLongitude()));
                 GeoPoint newGeoPoint = new GeoPoint(location.getLatitude(), location.getLongitude());
                 updateLocationMarker(newGeoPoint);
-                guardarUbicacion(newGeoPoint.getLatitude(), newGeoPoint.getLongitude());
+                Double latitud = newGeoPoint.getLatitude();
+                Double longitud= newGeoPoint.getLongitude();
+                guardarUbicacion(latitud, longitud);
 
             }
 
@@ -220,7 +223,7 @@ public class VenderActivity extends AppCompatActivity {
     }
     private int obtenerIdUsuario(String email, String password) {
 
-        return 1; // Reemplaza esto con tu lógica real
+        return 1;
     }
 
 }

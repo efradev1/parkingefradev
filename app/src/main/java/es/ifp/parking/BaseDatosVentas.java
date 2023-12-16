@@ -7,6 +7,9 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BaseDatosVentas extends SQLiteOpenHelper {
 
     protected SQLiteDatabase db;
@@ -52,7 +55,7 @@ public class BaseDatosVentas extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
-    public UnaVenta getUsuario(int id_venta){
+    public UnaVenta getVenta(int id_venta){
         UnaVenta v= null;
         Cursor res= null;
         db= this.getReadableDatabase();
@@ -77,6 +80,28 @@ public class BaseDatosVentas extends SQLiteOpenHelper {
         }
         res.close();
         return v;
+    }
+
+    public List<UnaVenta> obtenerTodasLasVentas(){
+
+        List<UnaVenta> ventas = new ArrayList<>();
+        db= this.getReadableDatabase();
+
+        Cursor res= db.rawQuery("SELECT * FROM venta", null);
+        while(res.moveToNext()){
+            @SuppressLint("Range") UnaVenta venta = new UnaVenta(
+                    res.getInt(res.getColumnIndex("id_venta")),
+                    res.getInt(res.getColumnIndex("id_usuario")),
+                    res.getString(res.getColumnIndex("fecha")),
+                    res.getString(res.getColumnIndex("hora")),
+                    res.getDouble(res.getColumnIndex("latitud")),
+                    res.getDouble(res.getColumnIndex("longitud")),
+                    res.getString(res.getColumnIndex("detalles"))
+            );
+            ventas.add(venta);
+        }
+        res.close();
+        return ventas;
     }
 
 }
