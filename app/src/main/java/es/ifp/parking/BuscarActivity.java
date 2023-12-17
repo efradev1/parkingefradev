@@ -1,15 +1,23 @@
 package es.ifp.parking;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,10 +30,17 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
+import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class BuscarActivity extends AppCompatActivity {
 
@@ -36,7 +51,14 @@ public class BuscarActivity extends AppCompatActivity {
     private MyLocationNewOverlay myLocationOverlay;
     private Button botonVolver;
     private Button botonInicio;
+    private String contenidoFecha = "";
+    private String contenidoHora = "";
+    private Double contenidoLatitud = null;
+    private Double contenidoLongitud = null;
+    private String contenidoDetalles = "";
     private BaseDatosVentas bdv;
+    protected BaseDatosUsuario bd;
+    protected BaseDatosReservas bdr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +67,8 @@ public class BuscarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_buscar);
 
         bdv = new BaseDatosVentas(this);
+        bdr = new BaseDatosReservas(this);
+        bd = new BaseDatosUsuario(this);
         botonVolver = findViewById(R.id.botonVolver_BuscarActivity);
         botonInicio = findViewById(R.id.botonInicio_BuscarActivity);
         mapView = findViewById(R.id.mapView_BuscarActivity);
@@ -141,15 +165,45 @@ public class BuscarActivity extends AppCompatActivity {
             marcadorUsuario.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
 
             mapView.getOverlays().add(marcadorUsuario);
+            ;
         }
 
-        for (UnaVenta venta : ventas) {
-            GeoPoint puntoVenta = new GeoPoint(venta.getLatitud(), venta.getLongitud());
-            Marker marcadorV = new Marker(mapView);
-            marcadorV.setPosition(puntoVenta);
-            marcadorV.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        Calendar calendarioActual = Calendar.getInstance();
 
-            mapView.getOverlays().add(marcadorV);
+        for (UnaVenta venta : ventas) {
+            SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+
+            try {
+                String fechaHoraV= venta.getFecha()+" "+venta.getHora();
+                Date fechaHoraVenta = dateTimeFormat.parse(fechaHoraV);
+
+                if(fechaHoraVenta.before(calendarioActual.getTime())){
+                    eliminarMarcadorReservado(venta.getLatitud(),venta.getLongitud());
+                }else{
+                    GeoPoint puntoVenta = new GeoPoint(venta.getLatitud(), venta.getLongitud());
+                    Marker marcadorV = new Marker(mapView);
+                    marcadorV.setPosition(puntoVenta);
+                    marcadorV.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+                    String direccion = obtenerDireccion(venta.getLatitud(), venta.getLongitud());
+
+                    mapView.getOverlays().add(marcadorV);
+
+                    marcadorV.setOnMarkerClickListener((marker, mapView1) -> {
+                        contenidoFecha = venta.getFecha();
+                        contenidoHora = venta.getHora();
+                        contenidoLatitud = venta.getLatitud();
+                        contenidoLongitud = venta.getLongitud();
+                        contenidoDetalles = venta.getDetalles();
+                        obtenerDireccion(venta.getLatitud(), venta.getLongitud());
+                        mostrarDialogoConfirmacion();
+                        return true;
+
+                    });
+
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -199,6 +253,79 @@ public class BuscarActivity extends AppCompatActivity {
         if (myLocationOverlay != null) {
             myLocationOverlay.disableMyLocation();
             myLocationOverlay.disableFollowLocation();
+        }
+    }
+
+    private String obtenerDireccion(double latitud, double longitud) {
+        String direccionString = "";
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+
+        try {
+            List<Address> direcciones = geocoder.getFromLocation(latitud, longitud, 1);
+            if (direcciones != null && direcciones.size() > 0) {
+                Address direccion = direcciones.get(0);
+                StringBuilder direccionBuilder = new StringBuilder();
+
+                for (int i = 0; i <= direccion.getMaxAddressLineIndex(); i++) {
+                    direccionBuilder.append(direccion.getAddressLine(i)).append(" ");
+                }
+                direccionString = direccionBuilder.toString();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return direccionString;
+    }
+
+    private void mostrarDialogoConfirmacion() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("¿Quiere hacer una reserva?\n"
+                + "Direccion: " + obtenerDireccion(contenidoLatitud, contenidoLongitud)
+                + "\nFecha y Hora: " + contenidoFecha + " " + contenidoHora
+                + "\nDetalles: " + contenidoDetalles);
+        builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                SharedPreferences preferences = getSharedPreferences("usuario_info", Context.MODE_PRIVATE);
+                String email = preferences.getString("email", "");
+                String password = preferences.getString("password", "");
+                bdr.insertReserva(bd.obtenerIdUsuario(email, password), contenidoFecha, contenidoHora, contenidoLatitud, contenidoLongitud, contenidoDetalles);
+                Toast toast = Toast.makeText(BuscarActivity.this, "Tu plaza ha sido reservada con éxito." +
+                        "Puede ver los detalles en Mis Reservas.", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                eliminarMarcadorReservado(contenidoLatitud, contenidoLongitud);
+
+                Intent pasarPantalla = new Intent(BuscarActivity.this, MenuUsuarioActivity.class);
+                finish();
+                startActivity(pasarPantalla);
+
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void eliminarMarcadorReservado(double latitud, double longitud) {
+        if (mapView != null) {
+            for (Overlay overlay : mapView.getOverlays()) {
+                if (overlay instanceof Marker) {
+                    Marker marker = (Marker) overlay;
+                    GeoPoint geoPoint = marker.getPosition();
+                    if (geoPoint.getLatitude() == latitud && geoPoint.getLongitude() == longitud) {
+                        mapView.getOverlays().remove(marker);
+                        bdv.deleteVenta(bdv.obtenerIdVenta(contenidoLatitud, contenidoLongitud));
+                        mapView.invalidate();
+                        break;
+                    }
+                }
+            }
         }
     }
 }

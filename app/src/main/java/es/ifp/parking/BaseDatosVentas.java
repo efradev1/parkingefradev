@@ -103,5 +103,29 @@ public class BaseDatosVentas extends SQLiteOpenHelper {
         res.close();
         return ventas;
     }
+    @SuppressLint("Range")
+    public int obtenerIdVenta(double latitud, double longitud) {
+        int idVenta = -1;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+
+        try {
+
+            String query = "SELECT id_venta FROM venta WHERE latitud = ? AND longitud = ?";
+            String[] selectionArgs = {String.valueOf(latitud), String.valueOf(longitud)};
+            cursor = db.rawQuery(query, selectionArgs);
+
+            if (cursor.moveToFirst()) {
+                idVenta = cursor.getInt(cursor.getColumnIndex("id_venta"));
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        return idVenta;
+    }
 
 }

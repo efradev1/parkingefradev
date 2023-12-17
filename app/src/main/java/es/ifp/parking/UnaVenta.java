@@ -7,14 +7,16 @@ public class UnaVenta {
     protected String hora;
     protected Double latitud;
     protected Double longitud;
+    protected String detalles;
 
-    public UnaVenta(int idv, int idu, String f, String h, Double lat, Double lon, String detalles){
+    public UnaVenta(int idv, int idu, String f, String h, Double lat, Double lon, String det){
         this.id_venta=idv;
         this.id_usuario=idu;
         this.fecha=f;
         this.hora=h;
         this.latitud=lat;
         this.longitud=lon;
+        this.detalles=det;
     }
     public int getId_venta() {
         return id_venta;
@@ -63,6 +65,8 @@ public class UnaVenta {
     public void setLongitud(Double longitud) {
         this.longitud = longitud;
     }
+    public String getDetalles(){return detalles;}
+    public void setDetalles(String detalles){this.detalles = detalles;}
 
 
 

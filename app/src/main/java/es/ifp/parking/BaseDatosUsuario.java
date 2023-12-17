@@ -142,11 +142,10 @@ public class BaseDatosUsuario extends SQLiteOpenHelper {
         Cursor cursor = null;
 
         try {
-            // Consulta para obtener el ID de usuario
+
             String query = "SELECT id_usuario FROM usuario WHERE email = ? AND password = ?";
             cursor = db.rawQuery(query, new String[]{email, password});
 
-            // Verificar si se encontró un usuario
             if (cursor.moveToFirst()) {
                 idUsuario = cursor.getInt(cursor.getColumnIndex("id_usuario"));
             }

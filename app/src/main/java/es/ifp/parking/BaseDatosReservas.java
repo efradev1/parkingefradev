@@ -32,7 +32,7 @@ public class BaseDatosReservas extends SQLiteOpenHelper {
     public void insertReserva(int id_usuario, String fecha, String hora, double latitud, double longitud, String detalles){
 
         db=this.getReadableDatabase();
-        db.execSQL("INSERT INTO venta(id_usuario, fecha, hora, latitud, longitud, detalles) " +
+        db.execSQL("INSERT INTO reserva(id_usuario, fecha, hora, latitud, longitud, detalles) " +
                 "VALUES (" + id_usuario + ",'" + fecha + "','" + hora + "'," + latitud + "," + longitud + ",'" + detalles + "')");
         db.close();
     }

@@ -7,14 +7,16 @@ public class UnaReserva {
     protected String hora;
     protected Double latitud;
     protected Double longitud;
+    protected  String detalles;
 
-    public UnaReserva(int idr, int idu, String f, String h, Double lat, Double lon, String detalles){
+    public UnaReserva(int idr, int idu, String f, String h, Double lat, Double lon, String det){
         this.id_reserva=idr;
         this.id_usuario=idu;
         this.fecha=f;
         this.hora=h;
         this.latitud=lat;
         this.longitud=lon;
+        this.detalles=det;
     }
     public int getId_reserva() {
         return id_reserva;
@@ -63,6 +65,8 @@ public class UnaReserva {
     public void setLongitud(Double longitud) {
         this.longitud = longitud;
     }
+    public String getDetalles(){return detalles;}
+    public void setDetalles(String detalles){ this.detalles = detalles;}
 
 
 
