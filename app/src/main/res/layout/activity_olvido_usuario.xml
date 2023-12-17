@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EFEEED"
-    android:backgroundTint="#CFC2BB">
+    android:background="#E6E6E6">
 
     <TextView
         android:id="@+id/label_Titulo_OlvidoUsuario"
         android:layout_width="415dp"
         android:layout_height="86dp"
         android:background="#E6F8CC32"
-        android:fontFamily="sans-serif-black"
+        android:fontFamily="@font/calistoga"
         android:gravity="center"
         android:text="¿Olvidó su contraseña?"
         android:textAlignment="center"
@@ -25,13 +24,12 @@
 
     <Button
         android:id="@+id/boton_Volver_OlvidoUsuario"
-        android:layout_width="122dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="290dp"
-        android:background="#DFD7D2"
-        android:backgroundTint="#DFD7D2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="#028CCA"
         android:backgroundTintMode="add"
         android:fontFamily="sans-serif-black"
         android:text="Volver"
@@ -41,9 +39,8 @@
         android:textStyle="bold"
         app:iconTint="#DFD7D2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.19"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label_Titulo_OlvidoUsuario" />
+        app:layout_constraintTop_toBottomOf="@+id/boton_Enviar_OlvidoUsuario" />
 
     <TextView
         android:id="@+id/label_instrucciones_OlvidoUsuario"
@@ -57,7 +54,8 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_Titulo_OlvidoUsuario" />
 
     <Button
         android:id="@+id/boton_Enviar_OlvidoUsuario"
@@ -68,6 +66,7 @@
         android:layout_marginEnd="50dp"
         android:text="Enviar"
         android:textColor="#FFFFFF"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmail_OlvidoUsuario" />

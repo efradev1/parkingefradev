@@ -6,11 +6,13 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MenuUsuarioActivity extends AppCompatActivity {
     protected TextView labelTitulo;
@@ -18,7 +20,6 @@ public class MenuUsuarioActivity extends AppCompatActivity {
     protected Button botonVender;
     protected Button botonMisReservas;
     protected Button botonSalir;
-    protected Button botonChat;
     protected Button botonAyuda;
     protected Button botonPerfil;
     protected ImageButton botonAnuncio;
@@ -34,7 +35,6 @@ public class MenuUsuarioActivity extends AppCompatActivity {
         botonVender=(Button) findViewById(R.id.boton_Vender_MenuUsuarioActivity);
         botonMisReservas=(Button) findViewById(R.id.boton_MisReservas_MenuUsuarioActivity);
         botonSalir= (Button)findViewById(R.id.boton_Salir_MenuUsuarioActivity);
-        botonChat=(Button) findViewById(R.id.boton_Chat_MenuUsuarioActivity);
         botonAyuda=(Button) findViewById(R.id.Boton_Ayuda_MenuUsuarioActivity);
         botonPerfil=(Button) findViewById(R.id.boton_Perfil_MenuUsuarioActivity);
         botonAnuncio=(ImageButton) findViewById(R.id.botonImagen_Anuncio_MenuUsuarioActivity);
@@ -70,12 +70,6 @@ public class MenuUsuarioActivity extends AppCompatActivity {
                 mostrarDialogoConfirmacion();
             }
         });
-        botonChat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
         botonAyuda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,6 +85,15 @@ public class MenuUsuarioActivity extends AppCompatActivity {
         botonAnuncio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String url = "https://www.ifp.es/";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+
+                if(intent.resolveActivity(getPackageManager())!=null){
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(MenuUsuarioActivity.this, "No se pudo abrir la web", Toast.LENGTH_LONG).show();
+                }
+
 
             }
         });

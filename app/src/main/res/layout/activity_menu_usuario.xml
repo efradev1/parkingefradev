@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CFC2BB"
+    android:background="#E6E6E6"
+    tools:context=".MenuUsuarioActivity">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6E6E6"
     tools:context=".MenuUsuarioActivity">
 
     <TextView
@@ -70,31 +77,20 @@
         android:layout_marginStart="5dp"
         android:layout_marginBottom="20dp"
         android:text="Salir"
-        android:textColor="#000000"
+        app:backgroundTint="#028CCA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/boton_Chat_MenuUsuarioActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="20dp"
-        android:text="Chat"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/boton_Salir_MenuUsuarioActivity" />
 
     <Button
         android:id="@+id/Boton_Ayuda_MenuUsuarioActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
         android:layout_marginBottom="20dp"
         android:text="Ayuda"
-        android:textColor="#000000"
+        app:backgroundTint="#028CCA"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/boton_Chat_MenuUsuarioActivity" />
+        app:layout_constraintEnd_toStartOf="@+id/boton_Perfil_MenuUsuarioActivity"
+        app:layout_constraintStart_toEndOf="@+id/boton_Salir_MenuUsuarioActivity" />
 
     <Button
         android:id="@+id/boton_Perfil_MenuUsuarioActivity"
@@ -103,23 +99,25 @@
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="20dp"
         android:text="Mi espacio"
-        android:textColor="#000000"
+        app:backgroundTint="#028CCA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageButton
         android:id="@+id/botonImagen_Anuncio_MenuUsuarioActivity"
-        android:layout_width="348dp"
-        android:layout_height="279dp"
+        android:layout_width="253dp"
+        android:layout_height="204dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toTopOf="@+id/Boton_Ayuda_MenuUsuarioActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boton_MisReservas_MenuUsuarioActivity"
         app:layout_constraintVertical_bias="0.454"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@drawable/img_5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

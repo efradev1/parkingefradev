@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/l"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#E6E6E6">
 
     <TextView
         android:id="@+id/label_title_reservas"
@@ -15,9 +16,10 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:background="#F1D886"
+        android:background="#E6F8CC32"
         android:gravity="center"
         android:text="Mis reservas"
+        android:fontFamily="@font/calistoga"
         android:textColor="#000000"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
