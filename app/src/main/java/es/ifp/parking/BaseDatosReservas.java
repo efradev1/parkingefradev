@@ -114,7 +114,7 @@ public class BaseDatosReservas extends SQLiteOpenHelper {
             res.moveToFirst();
             while (res.isAfterLast() == false) {
 
-                contenido =res.getString(res.getColumnIndex("-id_reserva"))+"\n"
+                contenido =res.getString(res.getColumnIndex("id_reserva"))+"-"+"\n"
                         + res.getString(res.getColumnIndex("fecha"))+"-"+res.getString(res.getColumnIndex("hora"))+"\n"
                         +res.getDouble(res.getColumnIndex("latitud"))+"-"+res.getDouble(res.getColumnIndex("longitud"))+"\n"
                         +res.getString(res.getColumnIndex("detalles"));
