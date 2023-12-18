@@ -104,6 +104,29 @@ public class BaseDatosVentas extends SQLiteOpenHelper {
         return ventas;
     }
     @SuppressLint("Range")
+    public ArrayList<String> getAllVentasSimple(){
+
+        ArrayList<String> listaVentas=new ArrayList<String>();
+        String contenido="";
+        Cursor res=null;
+        db = this.getReadableDatabase();
+        if(numVentas()>0) {
+            res = db.rawQuery("SELECT * FROM venta ORDER BY fecha ASC", null);
+            res.moveToFirst();
+            while (res.isAfterLast() == false) {
+
+                contenido =res.getString(res.getColumnIndex("id_venta"))+"\n"
+                        + res.getString(res.getColumnIndex("fecha"))+"-"+res.getString(res.getColumnIndex("hora"));
+                listaVentas.add(contenido);
+                res.moveToNext();
+
+            }
+        }
+        return listaVentas;
+
+    }
+
+    @SuppressLint("Range")
     public int obtenerIdVenta(double latitud, double longitud) {
         int idVenta = -1;
 
