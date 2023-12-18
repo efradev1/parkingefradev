@@ -66,10 +66,10 @@ public class MisReservasActivity extends AppCompatActivity {
                 partes=contenidoItem.split("-");
                 if (partes.length>1)
                 {
-                    UnaReserva = dbr.getReserva(Integer.parseInt(partes[0]));
+                    UnaReserva r = dbr.getReserva(Integer.parseInt(partes[0]));
 
-                    if(UnaReserva!=null) {
-                        identificador = Integer.parseInt(partes[0]);
+                    if(r!=null) {
+                        int identificador = Integer.parseInt(partes[0]);
                         pasarPantalla = new Intent(MisReservasActivity.this, VistaReservaActivity.class);
                         pasarPantalla.putExtra("id_reserva", contenidoItem);
                         pasarPantalla.putExtra("fecha", contenidoItem);
