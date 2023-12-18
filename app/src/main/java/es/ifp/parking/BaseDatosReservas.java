@@ -112,7 +112,7 @@ public class BaseDatosReservas extends SQLiteOpenHelper {
         Cursor res=null;
         db = this.getReadableDatabase();
         if(numReservas()>0) {
-            res = db.rawQuery("SELECT * FROM notas ORDER BY fecha ASC", null);
+            res = db.rawQuery("SELECT * FROM reserva ORDER BY fecha ASC", null);
             res.moveToFirst();
             while (res.isAfterLast() == false) {
 
