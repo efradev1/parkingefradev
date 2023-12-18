@@ -14,8 +14,7 @@ public class VistaVenta extends AppCompatActivity {
     protected TextView label1_venta;
     protected TextView label2_venta;
     protected TextView label3_venta;
-    protected EditText caja1_venta;
-    protected EditText caja2_venta;
+
     protected Button boton1_venta;
     protected Button boton2_venta;
     protected Button boton3_venta;
@@ -25,6 +24,9 @@ public class VistaVenta extends AppCompatActivity {
     protected Intent pasarPantalla;
 
     protected BaseDatosVentas dbv;
+    private Bundle extras;
+
+    private String reserva="";
 
 
 
@@ -37,8 +39,6 @@ public class VistaVenta extends AppCompatActivity {
         label1_venta=(TextView) findViewById(R.id.label1_venta);
         label2_venta=(TextView) findViewById(R.id.label2_venta);
         label3_venta=(TextView) findViewById(R.id.label3_venta);
-        caja1_venta=(EditText) findViewById(R.id.caja1_venta);
-        caja2_venta=(EditText) findViewById(R.id.caja2_venta);
         boton1_venta=(Button) findViewById(R.id.boton1_venta);
         boton2_venta=(Button) findViewById(R.id.boton2_venta);
         boton3_venta=(Button) findViewById(R.id.boton3_venta);
@@ -48,13 +48,9 @@ public class VistaVenta extends AppCompatActivity {
 
         dbv= new BaseDatosVentas(this);
 
-
-
-
-
-
-
-
+        extras=getIntent().getExtras();
+        reserva=extras.getString("Ventas");
+        label3_venta.setText(reserva);
 
         boton5_venta.setOnClickListener(new View.OnClickListener() {
             @Override

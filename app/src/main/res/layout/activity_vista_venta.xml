@@ -6,31 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".VistaVenta">
 
-    <TextView
-        android:id="@+id/label3_venta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/calistoga"
-        android:text="Precio"
-        android:textColor="#090909"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="275dp" />
-
-    <EditText
-        android:id="@+id/caja2_venta"
-        android:layout_width="296dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="4dp"
-        android:background="#FFC107"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label3_venta" />
-
     <Button
         android:id="@+id/boton5_venta"
         android:layout_width="199dp"
@@ -56,17 +31,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="64dp"
         android:fontFamily="@font/calistoga"
-        android:text="Fecha de reserva"
+        android:text="Datos de reserva"
         android:textColor="#090909"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/caja1_venta"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label1_venta"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/label1_venta" />
 
     <Button
         android:id="@+id/boton2_venta"
@@ -116,19 +90,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boton2_venta" />
 
-    <EditText
-        android:id="@+id/caja1_venta"
-        android:layout_width="296dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="4dp"
-        android:background="#FFC107"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label2_venta" />
-
     <TextView
         android:id="@+id/label1_venta"
         android:layout_width="396dp"
@@ -146,4 +107,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/label3_venta"
+        android:layout_width="299dp"
+        android:layout_height="206dp"
+        app:layout_constraintBottom_toTopOf="@+id/boton1_venta"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label2_venta" />
 </androidx.constraintlayout.widget.ConstraintLayout>
