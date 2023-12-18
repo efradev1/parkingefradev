@@ -60,7 +60,9 @@ public class MenuUsuarioActivity extends AppCompatActivity {
         botonMisReservas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent pasarPantalla = new Intent(MenuUsuarioActivity.this, MisReservasActivity.class);
+                finish();
+                startActivity(pasarPantalla);
             }
         });
         botonSalir.setOnClickListener(new View.OnClickListener() {

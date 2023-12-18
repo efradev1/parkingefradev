@@ -48,6 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="37dp"
             android:background="#4EAFF6"
+            android:fontFamily="@font/calistoga"
             android:gravity="center"
             android:text="Plazas reservadas"
             android:textColor="#000000"

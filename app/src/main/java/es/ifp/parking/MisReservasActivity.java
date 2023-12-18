@@ -29,8 +29,6 @@ public class MisReservasActivity extends AppCompatActivity {
     protected ArrayList<String> listadoVentas = new ArrayList<String>();
     protected ArrayAdapter<String> adaptador;
     protected BaseDatosUsuario db;
-    protected BaseDatosVentas dbv;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +44,10 @@ public class MisReservasActivity extends AppCompatActivity {
         listaR = (ListView) findViewById(R.id.list_reservas);
         listaV = (ListView) findViewById(R.id.list_ventas);
 
-        db= new BaseDatosUsuario(this);
-        dbv= new BaseDatosVentas(this);
+        db= new BaseDatosUsuario(this );
 
         //listado1 = db.get...
-       listadoVentas = dbv.getAllReservas();
+        //listado2 = db.get...
 
         adaptador = new ArrayAdapter<>(MisReservasActivity.this, android.R.layout.simple_list_item_1, listadoReservas);
         listaR.setAdapter(adaptador);
@@ -69,8 +66,6 @@ public class MisReservasActivity extends AppCompatActivity {
         listaV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-
 
             }
         });
