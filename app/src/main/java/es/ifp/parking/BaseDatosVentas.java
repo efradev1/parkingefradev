@@ -81,6 +81,8 @@ public class BaseDatosVentas extends SQLiteOpenHelper {
         return v;
     }
 
+
+
     public List<UnaVenta> obtenerTodasLasVentas(){
 
         List<UnaVenta> ventas = new ArrayList<>();
