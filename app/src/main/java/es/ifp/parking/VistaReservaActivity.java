@@ -21,8 +21,6 @@ public class VistaReservaActivity extends AppCompatActivity {
 
     //Declaracion de los componentes
     protected TextView label1;
-    protected TextView label2;
-    protected Button boton1;
     protected Button boton2;
     protected Button boton3;
     protected Button boton4;
@@ -50,13 +48,13 @@ public class VistaReservaActivity extends AppCompatActivity {
 
         //Referenciar componentes
         label1 = (TextView) findViewById(R.id.vistaReservasTextBox01);
-        label2 = (TextView) findViewById(R.id.vistaReservasTextBox02);
-        boton1 = (Button) findViewById(R.id.vistaReservasTextButtonChat);
+
         boton2 = (Button) findViewById(R.id.vistaReservasTextButtonNavi);
         boton3 = (Button) findViewById(R.id.vistaReservasTextButtonEndTransaction);
         boton4 = (Button) findViewById(R.id.vistaReservasTextButtonCancelTransaction);
         boton5 = (Button) findViewById(R.id.vistaReservaBoton_inicio_reservas);
         boton6 = (Button) findViewById(R.id.vistaReservaBoton_volver_reservas);
+        bundle = getIntent().getExtras();
 
         //LABEL1
         if (bundle != null) {
@@ -67,23 +65,16 @@ public class VistaReservaActivity extends AppCompatActivity {
             paquete5 = bundle.getString("longitud");
             paquete6 = bundle.getString("detalles");
 
-            Double latitud = Double.parseDouble(paquete4);
-            Double longitud = Double.parseDouble(paquete5);
+            //Double latitud = Double.parseDouble(paquete4);
+            //Double longitud = Double.parseDouble(paquete5);
+            //+"Dirección: "+obtenerDireccion(latitud, longitud)
 
-            label1.setText("Fecha: "+paquete2+","+"Hora: "+paquete3+"Dirección: "+obtenerDireccion(latitud, longitud)+"Detalles: "+paquete6);
+            label1.setText("Fecha: "+paquete2+","+"Hora: "+paquete3+"Detalles: "+paquete6);
         }
 
         //LABEL2
 
 
-        //CHAT
-        boton1.setEnabled(false);
-        boton1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //HACEMOS CHAT?
-            }
-        });
 
         //NAVEGACIÓN
         boton2.setOnClickListener(new View.OnClickListener() {
