@@ -159,7 +159,7 @@ public class DetallesVentaActivity extends AppCompatActivity {
                 int id_usuario= bd.obtenerIdUsuario(email,password);
                 db.insertVenta(id_usuario,contenidoFecha,contenidoHora,contenidoLatitud,contenidoLongitud,contenidoDetalles);
                 Toast toast= Toast.makeText(DetallesVentaActivity.this,"Tu plaza ha sido registrada con éxito." +
-                        "Puede ver los detalles en Mis Reservas.",Toast.LENGTH_LONG);
+                        "Puede ver los detalles en Mis Ventas.",Toast.LENGTH_LONG);
                          toast.setGravity(Gravity.CENTER,0,0);
                          toast.show();
 

@@ -78,5 +78,30 @@ public class BaseDatosReservas extends SQLiteOpenHelper {
         res.close();
         return r;
     }
+    @SuppressLint("Range")
+    public int obtenerIdReserva(double latitud, double longitud) {
+        int idReserva = -1;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+
+        try {
+
+            String query = "SELECT id_reserva FROM reserva WHERE latitud = ? AND longitud = ?";
+            String[] selectionArgs = {String.valueOf(latitud), String.valueOf(longitud)};
+            cursor = db.rawQuery(query, selectionArgs);
+
+            if (cursor.moveToFirst()) {
+                idReserva = cursor.getInt(cursor.getColumnIndex("id_reserva"));
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        return idReserva;
+    }
+
 
 }
