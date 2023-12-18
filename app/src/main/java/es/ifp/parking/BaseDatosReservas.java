@@ -20,7 +20,6 @@ public class BaseDatosReservas extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE table reserva(id_reserva integer primary key autoincrement not null,id_usuario integer, fecha text,hora text, latitud real, longitud real, detalles text, FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario))");
-
     }
 
     @Override
@@ -43,13 +42,12 @@ public class BaseDatosReservas extends SQLiteOpenHelper {
         db.close();
     }
     public int numReservas(){
-
         int num=0;
         db=this.getReadableDatabase();
         num=(int) DatabaseUtils.queryNumEntries(db,"reserva");
         return num;
-
     }
+
 
     @SuppressLint("Range")
     public UnaReserva getReserva(int id_reserva){
@@ -69,14 +67,11 @@ public class BaseDatosReservas extends SQLiteOpenHelper {
                             res.getDouble(res.getColumnIndex("latitud")),
                             res.getDouble(res.getColumnIndex("longitud")),
                             res.getString(res.getColumnIndex("detalles"))
-
                     );
                 }
-
             }
         }
         res.close();
         return r;
     }
-
 }

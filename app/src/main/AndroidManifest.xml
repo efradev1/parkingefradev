@@ -39,6 +39,9 @@
             android:name=".InicioSesionActivity"
             android:exported="false" />
         <activity
+            android:name=".MisReservasActivity"
+            android:exported="false" />
+        <activity
             android:name=".StartActivity"
             android:exported="true">
             <intent-filter>
