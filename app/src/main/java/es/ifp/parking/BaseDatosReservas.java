@@ -7,6 +7,8 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 public class BaseDatosReservas extends SQLiteOpenHelper {
 
     protected SQLiteDatabase db;
@@ -102,6 +104,29 @@ public class BaseDatosReservas extends SQLiteOpenHelper {
 
         return idReserva;
     }
+    @SuppressLint("Range")
+    public ArrayList<String> getAllReservas(){
 
+        ArrayList<String> listaReservas=new ArrayList<String>();
+        String contenido="";
+        Cursor res=null;
+        db = this.getReadableDatabase();
+        if(numReservas()>0) {
+            res = db.rawQuery("SELECT * FROM notas ORDER BY fecha ASC", null);
+            res.moveToFirst();
+            while (res.isAfterLast() == false) {
+
+                contenido =res.getString(res.getColumnIndex("id_reserva"))+"\n"
+                        + res.getString(res.getColumnIndex("fecha"))+"-"+res.getString(res.getColumnIndex("hora"))+"\n"
+                        +res.getDouble(res.getColumnIndex("latitud"))+"-"+res.getDouble(res.getColumnIndex("longitud"))+"\n"
+                        +res.getString(res.getColumnIndex("detalles"));
+                listaReservas.add(contenido);
+                res.moveToNext();
+
+            }
+        }
+        return listaReservas;
+
+    }
 
 }
