@@ -72,7 +72,6 @@ public class BaseDatosVentas extends SQLiteOpenHelper {
                             res.getDouble(res.getColumnIndex("latitud")),
                             res.getDouble(res.getColumnIndex("longitud")),
                             res.getString(res.getColumnIndex("detalles"))
-
                     );
                 }
 
