@@ -27,6 +27,8 @@ public class VistaVenta extends AppCompatActivity {
     protected BaseDatosVentas dbv;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
