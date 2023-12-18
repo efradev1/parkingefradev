@@ -26,6 +26,7 @@ public class MisReservasActivity extends AppCompatActivity {
     protected ListView listaV;
     protected String contenidoItem = "";
     private Intent pasarPantalla;
+    private String partes[];
 
     protected ArrayList<String> listadoReservas = new ArrayList<String>();
     protected ArrayList<String> listadoVentas = new ArrayList<String>();
@@ -49,7 +50,6 @@ public class MisReservasActivity extends AppCompatActivity {
 
         dbr= new BaseDatosReservas(this );
 
-
         listadoReservas = dbr.getAllReservas();
         //listadoVentas = dbv.obtenerTodasLasVentas();
 
@@ -63,15 +63,24 @@ public class MisReservasActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 contenidoItem = parent.getItemAtPosition(position).toString();
-                pasarPantalla = new Intent(MisReservasActivity.this, VistaReservaActivity.class);
-                pasarPantalla.putExtra("id_reserva", contenidoItem);
-                pasarPantalla.putExtra("fecha", contenidoItem);
-                pasarPantalla.putExtra("hora", contenidoItem);
-                pasarPantalla.putExtra("latitud", contenidoItem);
-                pasarPantalla.putExtra("longitud", contenidoItem);
-                pasarPantalla.putExtra("detalles", contenidoItem);
-                finish();
-                startActivity(pasarPantalla);
+                partes=contenidoItem.split("-");
+                if (partes.length>1)
+                {
+                    UnaReserva = dbr.getReserva(Integer.parseInt(partes[0]));
+
+                    if(UnaReserva!=null) {
+                        identificador = Integer.parseInt(partes[0]);
+                        pasarPantalla = new Intent(MisReservasActivity.this, VistaReservaActivity.class);
+                        pasarPantalla.putExtra("id_reserva", contenidoItem);
+                        pasarPantalla.putExtra("fecha", contenidoItem);
+                        pasarPantalla.putExtra("hora", contenidoItem);
+                        pasarPantalla.putExtra("latitud", contenidoItem);
+                        pasarPantalla.putExtra("longitud", contenidoItem);
+                        pasarPantalla.putExtra("detalles", contenidoItem);
+                        finish();
+                        startActivity(pasarPantalla);
+                    }
+                }
             }
         });
 
