@@ -7,6 +7,8 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 public class BaseDatosReservas extends SQLiteOpenHelper {
 
     protected SQLiteDatabase db;
@@ -77,6 +79,54 @@ public class BaseDatosReservas extends SQLiteOpenHelper {
         }
         res.close();
         return r;
+    }
+    @SuppressLint("Range")
+    public int obtenerIdReserva(double latitud, double longitud) {
+        int idReserva = -1;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+
+        try {
+
+            String query = "SELECT id_reserva FROM reserva WHERE latitud = ? AND longitud = ?";
+            String[] selectionArgs = {String.valueOf(latitud), String.valueOf(longitud)};
+            cursor = db.rawQuery(query, selectionArgs);
+
+            if (cursor.moveToFirst()) {
+                idReserva = cursor.getInt(cursor.getColumnIndex("id_reserva"));
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        return idReserva;
+    }
+    @SuppressLint("Range")
+    public ArrayList<String> getAllReservas(){
+
+        ArrayList<String> listaReservas=new ArrayList<String>();
+        String contenido="";
+        Cursor res=null;
+        db = this.getReadableDatabase();
+        if(numReservas()>0) {
+            res = db.rawQuery("SELECT * FROM reserva ORDER BY fecha ASC", null);
+            res.moveToFirst();
+            while (res.isAfterLast() == false) {
+
+                contenido =res.getString(res.getColumnIndex("id_reserva"))+"\n"
+                        + res.getString(res.getColumnIndex("fecha"))+"-"+res.getString(res.getColumnIndex("hora"))+"\n"
+                        +res.getDouble(res.getColumnIndex("latitud"))+"-"+res.getDouble(res.getColumnIndex("longitud"))+"\n"
+                        +res.getString(res.getColumnIndex("detalles"));
+                listaReservas.add(contenido);
+                res.moveToNext();
+
+            }
+        }
+        return listaReservas;
+
     }
 
 }
