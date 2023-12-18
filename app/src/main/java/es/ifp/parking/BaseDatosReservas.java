@@ -71,10 +71,8 @@ public class BaseDatosReservas extends SQLiteOpenHelper {
                             res.getDouble(res.getColumnIndex("latitud")),
                             res.getDouble(res.getColumnIndex("longitud")),
                             res.getString(res.getColumnIndex("detalles"))
-
                     );
                 }
-
             }
         }
         res.close();
@@ -128,5 +126,29 @@ public class BaseDatosReservas extends SQLiteOpenHelper {
         return listaReservas;
 
     }
+
+    @SuppressLint("Range")
+    public ArrayList<String> getAllReservasSimple(){
+
+        ArrayList<String> listaReservas=new ArrayList<String>();
+        String contenido="";
+        Cursor res=null;
+        db = this.getReadableDatabase();
+        if(numReservas()>0) {
+            res = db.rawQuery("SELECT * FROM reserva ORDER BY fecha ASC", null);
+            res.moveToFirst();
+            while (res.isAfterLast() == false) {
+
+                contenido =res.getString(res.getColumnIndex("id_reserva"))+"\n"
+                        + res.getString(res.getColumnIndex("fecha"))+"-"+res.getString(res.getColumnIndex("hora"));
+                listaReservas.add(contenido);
+                res.moveToNext();
+
+            }
+        }
+        return listaReservas;
+
+    }
+
 
 }

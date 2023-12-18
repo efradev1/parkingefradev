@@ -5,11 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class VistaReservaActivity extends AppCompatActivity {
 
@@ -26,7 +32,12 @@ public class VistaReservaActivity extends AppCompatActivity {
     private BaseDatosReservas bdr;
     private Intent pasarPantalla;
     private Bundle bundle;
-    private String paquete = "";
+    private String paquete1 = "";
+    private String paquete2 = "";
+    private String paquete3 = "";
+    private String paquete4 = "";
+    private String paquete5 = "";
+    private String paquete6 = "";
     private String contenidoLabel = "";
     private String partes[];
     private int identificador = 0;
@@ -49,10 +60,17 @@ public class VistaReservaActivity extends AppCompatActivity {
 
         //LABEL1
         if (bundle != null) {
-            dbr = new BaseDatosReservas(this);
+            //paquete1 = bundle.getString("id_reserva");
+            paquete2 = bundle.getString("fecha");
+            paquete3 = bundle.getString("hora");
+            paquete4 = bundle.getString("latitud");
+            paquete5 = bundle.getString("longitud");
+            paquete6 = bundle.getString("detalles");
 
-            paquete = bundle.getString("id_reserva");
-            label1.setText("Día y hora de la reserva"+paquete);
+            Double latitud = Double.parseDouble(paquete4);
+            Double longitud = Double.parseDouble(paquete5);
+
+            label1.setText("Fecha: "+paquete2+","+"Hora: "+paquete3+"Dirección: "+obtenerDireccion(latitud, longitud)+"Detalles: "+paquete6);
         }
 
         //LABEL2
@@ -179,5 +197,25 @@ public class VistaReservaActivity extends AppCompatActivity {
             }
         });
 
+    }
+    private String obtenerDireccion(double latitud, double longitud) {
+        String direccionString = "";
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+
+        try {
+            List<Address> direcciones = geocoder.getFromLocation(latitud, longitud, 1);
+            if (direcciones != null && direcciones.size() > 0) {
+                Address direccion = direcciones.get(0);
+                StringBuilder direccionBuilder = new StringBuilder();
+
+                for (int i = 0; i <= direccion.getMaxAddressLineIndex(); i++) {
+                    direccionBuilder.append(direccion.getAddressLine(i)).append(" ");
+                }
+                direccionString = direccionBuilder.toString();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return direccionString;
     }
 }
