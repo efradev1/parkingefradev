@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class VistaReservaActivity extends AppCompatActivity {
 
@@ -21,6 +22,15 @@ public class VistaReservaActivity extends AppCompatActivity {
     protected Button boton4;
     protected Button boton5;
     protected Button boton6;
+
+    private BaseDatosReservas bdr;
+    private Intent pasarPantalla;
+    private Bundle bundle;
+    private String paquete = "";
+    private String contenidoLabel = "";
+    private String partes[];
+    private int identificador = 0;
+    protected BaseDatosReservas dbr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +47,19 @@ public class VistaReservaActivity extends AppCompatActivity {
         boton5 = (Button) findViewById(R.id.vistaReservaBoton_inicio_reservas);
         boton6 = (Button) findViewById(R.id.vistaReservaBoton_volver_reservas);
 
+        //LABEL1
+        if (bundle != null) {
+            dbr = new BaseDatosReservas(this);
+
+            paquete = bundle.getString("id_reserva");
+            label1.setText("Día y hora de la reserva"+paquete);
+        }
+
+        //LABEL2
+
+
         //CHAT
+        boton1.setEnabled(false);
         boton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,7 +85,7 @@ public class VistaReservaActivity extends AppCompatActivity {
                         VistaReservaActivity.this);
 
                 // set title
-                alertDialogBuilder.setTitle("");
+                alertDialogBuilder.setTitle("Finalizar transacción");
 
                 // set dialog message
                 alertDialogBuilder
@@ -100,7 +122,7 @@ public class VistaReservaActivity extends AppCompatActivity {
                         VistaReservaActivity.this);
 
                 // set title
-                alertDialogBuilder.setTitle("");
+                alertDialogBuilder.setTitle("Cancelar reserva");
 
                 // set dialog message
                 alertDialogBuilder
@@ -108,8 +130,16 @@ public class VistaReservaActivity extends AppCompatActivity {
                         .setCancelable(false)
                         .setPositiveButton("Sí",new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
-                                // if this button is clicked, cancel the booking
-                                // current activity
+                                contenidoLabel = label1.getText().toString();
+                                partes = contenidoLabel.split(".-");
+                                if (partes.length > 1) {
+                                    identificador = Integer.parseInt(partes[0]);
+                                    dbr.deleteReserva(identificador);
+                                    Toast.makeText(VistaReservaActivity.this, "Reserva cancelada correctamente", Toast.LENGTH_SHORT).show();
+                                    pasarPantalla = new Intent(VistaReservaActivity.this, MenuUsuarioActivity.class);
+                                    finish();
+                                    startActivity(pasarPantalla);
+                                }
                                 VistaReservaActivity.this.finish();
                             }
                         })

@@ -103,6 +103,29 @@ public class BaseDatosVentas extends SQLiteOpenHelper {
         return ventas;
     }
     @SuppressLint("Range")
+    public ArrayList<String> getAllVentasSimple(){
+
+        ArrayList<String> listaVentas=new ArrayList<String>();
+        String contenido="";
+        Cursor res=null;
+        db = this.getReadableDatabase();
+        if(numVentas()>0) {
+            res = db.rawQuery("SELECT * FROM venta ORDER BY fecha ASC", null);
+            res.moveToFirst();
+            while (res.isAfterLast() == false) {
+
+                contenido =res.getString(res.getColumnIndex("id_venta"))+"\n"
+                        + res.getString(res.getColumnIndex("fecha"))+"-"+res.getString(res.getColumnIndex("hora"));
+                listaVentas.add(contenido);
+                res.moveToNext();
+
+            }
+        }
+        return listaVentas;
+
+    }
+
+    @SuppressLint("Range")
     public int obtenerIdVenta(double latitud, double longitud) {
         int idVenta = -1;
 
@@ -125,6 +148,40 @@ public class BaseDatosVentas extends SQLiteOpenHelper {
         }
 
         return idVenta;
+    }
+
+    public int numReservas(){
+
+        int num=0;
+        db=this.getReadableDatabase();
+        num=(int) DatabaseUtils.queryNumEntries(db,"reserva");
+        return num;
+
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<String> getAllReservas(){
+
+        ArrayList<String> listaReservas=new ArrayList<String>();
+        String contenido="";
+        Cursor res=null;
+        db = this.getReadableDatabase();
+        if(numReservas()>0) {
+            res = db.rawQuery("SELECT * FROM reserva ORDER BY fecha ASC", null);
+            res.moveToFirst();
+            while (res.isAfterLast() == false) {
+
+                contenido =res.getString(res.getColumnIndex("id_reserva"))+"\n"
+                        + res.getString(res.getColumnIndex("fecha"))+"-"+res.getString(res.getColumnIndex("hora"))+"\n"
+                        +res.getDouble(res.getColumnIndex("latitud"))+"-"+res.getDouble(res.getColumnIndex("longitud"))+"\n"
+                        +res.getString(res.getColumnIndex("detalles"));
+                listaReservas.add(contenido);
+                res.moveToNext();
+
+            }
+        }
+        return listaReservas;
+
     }
 
 }

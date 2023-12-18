@@ -24,14 +24,11 @@ public class MisReservasActivity extends AppCompatActivity {
     protected Button boton2;
     protected ListView listaR;
     protected ListView listaV;
-    protected String contenidoItem = "";
-    private Intent pasarPantalla;
 
     protected ArrayList<String> listadoReservas = new ArrayList<String>();
     protected ArrayList<String> listadoVentas = new ArrayList<String>();
     protected ArrayAdapter<String> adaptador;
-    private BaseDatosReservas dbr;
-    private BaseDatosVentas dbv;
+    protected BaseDatosUsuario db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +44,10 @@ public class MisReservasActivity extends AppCompatActivity {
         listaR = (ListView) findViewById(R.id.list_reservas);
         listaV = (ListView) findViewById(R.id.list_ventas);
 
-        dbr= new BaseDatosReservas(this );
+        db= new BaseDatosUsuario(this );
 
-
-        listadoReservas = dbr.getAllReservas();
-        //listadoVentas = dbv.obtenerTodasLasVentas();
+        //listado1 = db.get...
+        //listado2 = db.get...
 
         adaptador = new ArrayAdapter<>(MisReservasActivity.this, android.R.layout.simple_list_item_1, listadoReservas);
         listaR.setAdapter(adaptador);
@@ -61,19 +57,15 @@ public class MisReservasActivity extends AppCompatActivity {
         //Listener de la lista de reservas
         listaR.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                contenidoItem = parent.getItemAtPosition(position).toString();
-                pasarPantalla = new Intent(MisReservasActivity.this, DetallesVentaActivity.class);
-                pasarPantalla.putExtra("id_reserva", contenidoItem);
-                finish();
-                startActivity(pasarPantalla);
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
             }
         });
 
         //Listener de la lista de ventas
         listaV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
             }
         });

@@ -7,6 +7,8 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 public class BaseDatosUsuario extends SQLiteOpenHelper {
 
     protected SQLiteDatabase db;
@@ -157,6 +159,10 @@ public class BaseDatosUsuario extends SQLiteOpenHelper {
 
         return idUsuario;
     }
+
+
+
+
 
 
 }
