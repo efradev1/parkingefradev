@@ -74,6 +74,11 @@ public class MisReservasActivity extends AppCompatActivity {
         listaV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                contenidoItem = parent.getItemAtPosition(position).toString();
+                pasarPantalla = new Intent(MisReservasActivity.this, VistaVenta.class);
+                pasarPantalla.putExtra("id_reserva", contenidoItem);
+                finish();
+                startActivity(pasarPantalla);
 
             }
         });
