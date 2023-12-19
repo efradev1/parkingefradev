@@ -39,6 +39,7 @@ public class VistaReservaActivity extends AppCompatActivity {
     private String contenidoLabel = "";
     private String partes[];
     private int identificador = 0;
+
     protected BaseDatosReservas dbr;
 
     @Override
