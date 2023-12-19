@@ -90,7 +90,6 @@ public class BaseDatosUsuario extends SQLiteOpenHelper {
                             storedPass
                     );
                 }
-
             }
         }
         res.close();
@@ -144,7 +143,6 @@ public class BaseDatosUsuario extends SQLiteOpenHelper {
                         res.getString(res.getColumnIndex("modeloC")),
                         res.getString(res.getColumnIndex("matricula")),
                         res.getString(res.getColumnIndex("password"))
-
                 );
                 credencialesVemail=true;
             }

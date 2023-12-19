@@ -1,6 +1,8 @@
 package es.ifp.parking;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
 
 public class activity_perfil extends AppCompatActivity {
 
@@ -21,10 +25,11 @@ public class activity_perfil extends AppCompatActivity {
     protected Button button1;
     protected Button button2;
     protected Button button3;
+    private UnUsuario u;
+
+    private BaseDatosUsuario bdu;
 
     protected ImageView imageView1;
-
-    private activity_modificar_perfil activity_modificar_perfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,28 +46,32 @@ public class activity_perfil extends AppCompatActivity {
         button1=(Button) findViewById(R.id.button1_perfil);
         button2=(Button) findViewById(R.id.button2_perfil);
         button3=(Button) findViewById(R.id.button3_perfil);
-
         imageView1=(ImageView) findViewById(R.id.imageView1_perfil);
 
-        activity_modificar_perfil = new activity_modificar_perfil();
+        bdu = new BaseDatosUsuario(this);
 
-        String nombreModificado = activity_modificar_perfil.editText1.getText().toString();
-        label2.setText(nombreModificado);
+        SharedPreferences preferences = getSharedPreferences("usuario_info", Context.MODE_PRIVATE);
+        String email = preferences.getString("email", "");
+        String password = preferences.getString("password", "");
 
-        String apellidoModificado = activity_modificar_perfil.editText2.getText().toString();
-        label3.setText(apellidoModificado);
+        u = bdu.getUsuario(email, password);
 
-        String emailModificado = activity_modificar_perfil.editText3.getText().toString();
-        label4.setText(emailModificado);
+        String nombre = u.getNombre();
+        label2.setText(nombre);
 
-        String telefonoModificado = activity_modificar_perfil.editText4.getText().toString();
-        label5.setText(telefonoModificado);
+        String apellidos = u.getApellido();
+        label3.setText(apellidos);
 
-        String cpModificado = activity_modificar_perfil.editText5.getText().toString();
-        label6.setText(cpModificado);
+        String email2 = u.getEmail();
+        label4.setText(email2);
 
-        imageView1.setImageDrawable(activity_modificar_perfil.imageView1.getDrawable());
+        String telefono = u.getTelefono();
+        label5.setText(telefono);
 
+        String cp = u.getCp();
+        label6.setText(cp);
+
+        //MODIFICAR PERFIL
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +95,7 @@ public class activity_perfil extends AppCompatActivity {
             }
         });
 
+        //VOLVER
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

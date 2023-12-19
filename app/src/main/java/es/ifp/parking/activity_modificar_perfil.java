@@ -156,6 +156,7 @@ public class activity_modificar_perfil extends AppCompatActivity {
             }
         });
 
+        //Subir foto
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
