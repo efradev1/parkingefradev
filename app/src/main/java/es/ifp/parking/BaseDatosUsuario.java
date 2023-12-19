@@ -1,6 +1,7 @@
 package es.ifp.parking;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
@@ -29,6 +30,21 @@ public class BaseDatosUsuario extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS usuario");
         onCreate(db);
 
+    }
+
+    public void updateUsuario(String nombre, String apellido, String email, String telefono, String cp, String password) {
+        db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("nombre", nombre);
+        values.put("apellido", apellido);
+        values.put("email", email);
+        values.put("telefono", telefono);
+        values.put("cp", cp);
+        values.put("password", password);
+
+        db.update("usuario", values, null, null);
+        db.close();
     }
 
     public void insertUsuario(String nombre, String apellido,  String email, String telefono, String cp, String marcaC, String modeloC, String matricula ,String password){
