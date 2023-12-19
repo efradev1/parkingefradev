@@ -46,21 +46,26 @@ public class VistaReservaActivity extends AppCompatActivity {
         boton5 = (Button) findViewById(R.id.vistaReservaBoton_inicio_reservas);
         boton6 = (Button) findViewById(R.id.vistaReservaBoton_volver_reservas);
         dbr=new BaseDatosReservas(this);
+        //Recoge los paquetes que se han pasado desde la clase anterior
         bundle=getIntent().getExtras();
 
         //LABEL1
         if (bundle != null) {
-
+            //asignamos la fecha y el id a las variables correspondientes
             paquete2 = bundle.getString("fecha");
             id_reserva = bundle.getInt("id_reserva");
 
+            //llamamos al método de la base de datos, pasándole por parámetros el id obtenido de la actividad anterior
             reserva=dbr.getReserva(id_reserva);
 
+            //Obtenemos la latitud y la longitud de la reserva
             latitud=reserva.getLatitud();
             longitud=reserva.getLongitud();
 
+            //este método traduce latitud y longitud a una dirección y la asigna al String dirección
             String direccion = obtenerDireccion(latitud, longitud);
 
+            //Asignamos los datos obtenidos a la etiqueta
             label1.setText("Los datos de tu reserva en venta son: "+ "\n" + paquete2 + "\n" +
                     "La dirección de tu reserva en venta es: "+ "\n" + direccion);
         }
@@ -81,7 +86,7 @@ public class VistaReservaActivity extends AppCompatActivity {
                         .setCancelable(false)
                         .setPositiveButton("Sí",new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
-
+                                //asignamos el id de la reserva al método de la base de datos que borra la reserva
                                 dbr.deleteReserva(id_reserva);
                                     Toast.makeText(VistaReservaActivity.this, "Reserva cancelada correctamente", Toast.LENGTH_SHORT).show();
                                     pasarPantalla = new Intent(VistaReservaActivity.this, MenuUsuarioActivity.class);

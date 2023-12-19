@@ -48,12 +48,15 @@ public class MisReservasActivity extends AppCompatActivity {
         listaR = (ListView) findViewById(R.id.list_reservas);
         listaV = (ListView) findViewById(R.id.list_ventas);
 
+        //Referenciamos las bases de datos
         dbr= new BaseDatosReservas(this );
         dbv= new BaseDatosVentas(this);
 
+        //Se asignan a los listados los métodos que devuelven los resultados necesarios
         listadoReservas = dbr.getAllReservas();
         listadoVentas = dbv.getAllVentas();
 
+        //Creamos un ArrayAdapter
         adaptador = new ArrayAdapter<>(MisReservasActivity.this, android.R.layout.simple_list_item_1, listadoReservas);
         listaR.setAdapter(adaptador);
         adaptador = new ArrayAdapter<>(MisReservasActivity.this, android.R.layout.simple_list_item_1, listadoVentas);
@@ -67,8 +70,10 @@ public class MisReservasActivity extends AppCompatActivity {
                 partes=contenidoItem.split("-");
                 if (partes.length>1)
                 {
+                    //Asignamos al objeto r de la clase UnaReserva los datos obtenidos de la bbdd, el id, la posición 0 del Array
                     UnaReserva r = dbr.getReserva(Integer.parseInt(partes[0]));
 
+                    //Si r es distinto de null, selecciona la reserva y pasa los paquetes necesarios a la siguiente pantalla para que se muestren los detalles de la reserva
                     if(r!=null) {
                         int identificador = Integer.parseInt(partes[0]);
                         pasarPantalla = new Intent(MisReservasActivity.this, VistaReservaActivity.class);
@@ -82,7 +87,7 @@ public class MisReservasActivity extends AppCompatActivity {
             }
         });
 
-        //Listener de la lista de ventas
+        //Listener de la lista de ventas, hace lo mismo que el de arriba pero pasa a la pantalla detalles ventas
         listaV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -103,6 +108,7 @@ public class MisReservasActivity extends AppCompatActivity {
                 }}
         });
 
+        //Botón inicio
         boton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,6 +118,7 @@ public class MisReservasActivity extends AppCompatActivity {
             }
         });
 
+        //Botón volver
         boton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

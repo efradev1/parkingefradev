@@ -29,7 +29,6 @@ public class BaseDatosUsuario extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS usuario");
         onCreate(db);
-
     }
 
     public void updateUsuario(String nombre, String apellido, String email, String telefono, String cp, String password) {
@@ -124,6 +123,7 @@ public class BaseDatosUsuario extends SQLiteOpenHelper {
 
         return credencialesV;
     }
+
     @SuppressLint("Range")
     public boolean UnUsuarioVemail(String email){
         UnUsuario u= null;
@@ -170,7 +170,6 @@ public class BaseDatosUsuario extends SQLiteOpenHelper {
                 cursor.close();
             }
         }
-
         return idUsuario;
     }
 
