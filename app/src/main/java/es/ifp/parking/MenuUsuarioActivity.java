@@ -85,7 +85,7 @@ public class MenuUsuarioActivity extends AppCompatActivity {
         botonPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent pasarPantalla = new Intent(MenuUsuarioActivity.this, activity_perfil.class);
+                Intent pasarPantalla = new Intent(MenuUsuarioActivity.this, activity_mi_espacio.class);
                 finish();
                 startActivity(pasarPantalla);
             }
