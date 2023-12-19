@@ -3,6 +3,8 @@ package es.ifp.parking;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -159,8 +161,10 @@ public class activity_modificar_perfil extends AppCompatActivity {
             }
         });
 
-            @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        @Override
+        protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
