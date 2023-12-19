@@ -127,7 +127,7 @@ public class activity_modificar_perfil extends AppCompatActivity {
                     Toast.makeText(activity_modificar_perfil.this, "No coinciden", Toast.LENGTH_LONG).show();
                 } else {
 
-                    db.insertUsuario(contenidoEditText1, contenidoEditText2, contenidoEditText3, contenidoEditText4, contenidoEditText5, contenidoEditText6);
+                    db.updateUsuario(contenidoEditText1, contenidoEditText2, contenidoEditText3, contenidoEditText4, contenidoEditText5, contenidoEditText6);
                     Toast.makeText(activity_modificar_perfil.this, "Cambios guardados", Toast.LENGTH_LONG).show();
 
                     SharedPreferences preferences = getSharedPreferences("usuario_info", Context.MODE_PRIVATE);
@@ -166,7 +166,6 @@ public class activity_modificar_perfil extends AppCompatActivity {
 
         @Override
         protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
 
         super.onActivityResult(requestCode, resultCode, data);
 
