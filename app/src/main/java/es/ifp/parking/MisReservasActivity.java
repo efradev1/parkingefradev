@@ -51,7 +51,7 @@ public class MisReservasActivity extends AppCompatActivity {
 
 
         listadoReservas = dbr.getAllReservas();
-        //listadoVentas = dbv.obtenerTodasLasVentas();
+        listadoVentas = dbv.getAllReservas();
 
         adaptador = new ArrayAdapter<>(MisReservasActivity.this, android.R.layout.simple_list_item_1, listadoReservas);
         listaR.setAdapter(adaptador);
@@ -82,6 +82,11 @@ public class MisReservasActivity extends AppCompatActivity {
                 contenidoItem = parent.getItemAtPosition(position).toString();
                 pasarPantalla = new Intent(MisReservasActivity.this, VistaVenta.class);
                 pasarPantalla.putExtra("id_reserva", contenidoItem);
+                pasarPantalla.putExtra("fecha", contenidoItem);
+                pasarPantalla.putExtra("hora", contenidoItem);
+                pasarPantalla.putExtra("latitud", contenidoItem);
+                pasarPantalla.putExtra("longitud", contenidoItem);
+                pasarPantalla.putExtra("detalles", contenidoItem);
                 finish();
                 startActivity(pasarPantalla);
             }
