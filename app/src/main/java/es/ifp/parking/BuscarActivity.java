@@ -63,6 +63,7 @@ public class BuscarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Configuración del mapa
         Configuration.getInstance().load(this, getPreferences(MODE_PRIVATE));
         setContentView(R.layout.activity_buscar);
 
@@ -78,7 +79,7 @@ public class BuscarActivity extends AppCompatActivity {
 
         mapController = mapView.getController();
         mapController.setZoom(15.0);
-
+        // Verificación de permisos y configuración del LocationManager
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
@@ -87,9 +88,11 @@ public class BuscarActivity extends AppCompatActivity {
                     1);
 
         } else {
+            // Configuración del LocationManager y mostrar plazas en venta en el mapa
             setupLocationManager();
             mostrarPlazasEnVentaMapa();
         }
+        // Configuración de botones
         botonVolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,6 +113,7 @@ public class BuscarActivity extends AppCompatActivity {
             }
         });
     }
+    // Configuración del LocationManager
 
     private void setupLocationManager() {
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -148,13 +152,13 @@ public class BuscarActivity extends AppCompatActivity {
         myLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(this), mapView);
         mapView.getOverlays().add(myLocationOverlay);
     }
-
+    // Actualización del marcador de ubicación
     private void updateLocationMarker(GeoPoint newGeoPoint) {
         if (mapView != null) {
             mapController.animateTo(newGeoPoint);
         }
     }
-
+    // Mostrar plazas en venta en el mapa
     private void mostrarPlazasEnVentaMapa() {
         List<UnaVenta> ventas = bdv.obtenerTodasLasVentas();
 
@@ -255,7 +259,7 @@ public class BuscarActivity extends AppCompatActivity {
             myLocationOverlay.disableFollowLocation();
         }
     }
-
+   //Traduce la latitud y longitud en Direccion
     private String obtenerDireccion(double latitud, double longitud) {
         String direccionString = "";
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
@@ -277,7 +281,7 @@ public class BuscarActivity extends AppCompatActivity {
 
         return direccionString;
     }
-
+    //Dialogo confirmacion reserva
     private void mostrarDialogoConfirmacion() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -311,7 +315,7 @@ public class BuscarActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
+    //Eliminar marcador de punto seleccionado para reserva
     private void eliminarMarcadorReservado(double latitud, double longitud) {
         if (mapView != null) {
             for (Overlay overlay : mapView.getOverlays()) {

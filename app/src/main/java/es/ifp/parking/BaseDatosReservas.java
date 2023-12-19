@@ -15,24 +15,27 @@ public class BaseDatosReservas extends SQLiteOpenHelper {
 
 
     public BaseDatosReservas(Context context) {
+        // Constructor de la clase, llamando al constructor de la clase base SQLiteOpenHelper
 
         super(context,"Reservas", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        // Método llamado al crear la base de datos, aquí se define la estructura de la tabla
         db.execSQL("CREATE table reserva(id_reserva integer primary key autoincrement not null,id_usuario integer, fecha text,hora text, latitud real, longitud real, detalles text, FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario))");
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Método llamado cuando se actualiza la base de datos, en este caso, se elimina la tabla si existe
         db.execSQL("DROP TABLE IF EXISTS reserva");
 
     }
 
     public void insertReserva(int id_usuario, String fecha, String hora, double latitud, double longitud, String detalles){
-
+        // Método para insertar una nueva reserva en la base de datos
         db=this.getReadableDatabase();
         db.execSQL("INSERT INTO reserva(id_usuario, fecha, hora, latitud, longitud, detalles) " +
                 "VALUES (" + id_usuario + ",'" + fecha + "','" + hora + "'," + latitud + "," + longitud + ",'" + detalles + "')");
@@ -40,11 +43,13 @@ public class BaseDatosReservas extends SQLiteOpenHelper {
     }
 
     public void deleteReserva(int id_reserva){
+        // Método para eliminar una reserva específica de la base de datos
         db=this.getWritableDatabase();
         db.execSQL("DELETE FROM reserva WHERE id_reserva=" +id_reserva);
         db.close();
     }
     public int numReservas(){
+        // Método para obtener la cantidad de registros en la tabla "reserva"
 
         int num=0;
         db=this.getReadableDatabase();
@@ -55,6 +60,7 @@ public class BaseDatosReservas extends SQLiteOpenHelper {
 
     @SuppressLint("Range")
     public UnaReserva getReserva(int id_reserva){
+        // Método para obtener una reserva específica por su id_reserva
         UnaReserva r= null;
         Cursor res= null;
         db= this.getReadableDatabase();
@@ -80,6 +86,7 @@ public class BaseDatosReservas extends SQLiteOpenHelper {
     }
     @SuppressLint("Range")
     public int obtenerIdReserva(double latitud, double longitud) {
+        // Método para obtener el id_reserva correspondiente a una reserva por su latitud y longitud
         int idReserva = -1;
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -104,6 +111,7 @@ public class BaseDatosReservas extends SQLiteOpenHelper {
     }
     @SuppressLint("Range")
     public ArrayList<String> getAllReservas(){
+        // Método para obtener una lista de cadenas que representan todas las reservas en la base de datos
 
         ArrayList<String> listaReservas=new ArrayList<String>();
         String contenido="";
@@ -129,7 +137,7 @@ public class BaseDatosReservas extends SQLiteOpenHelper {
 
     @SuppressLint("Range")
     public ArrayList<String> getAllReservasSimple(){
-
+        // Método para obtener una lista de cadenas que representan todas las reservas (simplificadas) en la base de datos
         ArrayList<String> listaReservas=new ArrayList<String>();
         String contenido="";
         Cursor res=null;
