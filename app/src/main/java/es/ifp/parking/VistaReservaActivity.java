@@ -54,22 +54,22 @@ public class VistaReservaActivity extends AppCompatActivity {
         boton4 = (Button) findViewById(R.id.vistaReservasTextButtonCancelTransaction);
         boton5 = (Button) findViewById(R.id.vistaReservaBoton_inicio_reservas);
         boton6 = (Button) findViewById(R.id.vistaReservaBoton_volver_reservas);
-        bundle = getIntent().getExtras();
+        bundle=getIntent().getExtras();
 
         //LABEL1
         if (bundle != null) {
             //paquete1 = bundle.getString("id_reserva");
             paquete2 = bundle.getString("fecha");
             paquete3 = bundle.getString("hora");
-            paquete4 = bundle.getString("latitud");
-            paquete5 = bundle.getString("longitud");
+            //paquete4 = bundle.getString("latitud");
+            //paquete5 = bundle.getString("longitud");
             paquete6 = bundle.getString("detalles");
 
             //Double latitud = Double.parseDouble(paquete4);
             //Double longitud = Double.parseDouble(paquete5);
             //+"Dirección: "+obtenerDireccion(latitud, longitud)
 
-            label1.setText("Fecha: "+paquete2+","+"Hora: "+paquete3+"Detalles: "+paquete6);
+            label1.setText(paquete2);
         }
 
         //LABEL2

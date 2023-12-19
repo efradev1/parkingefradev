@@ -146,11 +146,11 @@ public class BaseDatosVentas extends SQLiteOpenHelper {
         Cursor res=null;
         db = this.getReadableDatabase();
         if(numReservas()>0) {
-            res = db.rawQuery("SELECT * FROM reserva ORDER BY fecha ASC", null);
+            res = db.rawQuery("SELECT * FROM venta ORDER BY fecha ASC", null);
             res.moveToFirst();
             while (res.isAfterLast() == false) {
 
-                contenido =res.getString(res.getColumnIndex("id_reserva"))+"\n"
+                contenido =res.getString(res.getColumnIndex("id_venta"))+"-"+"\n"
                         + res.getString(res.getColumnIndex("fecha"))+"-"+res.getString(res.getColumnIndex("hora"))+"\n"
                         +res.getDouble(res.getColumnIndex("latitud"))+"-"+res.getDouble(res.getColumnIndex("longitud"))+"\n"
                         +res.getString(res.getColumnIndex("detalles"));
