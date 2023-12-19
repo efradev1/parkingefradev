@@ -43,32 +43,12 @@
         app:layout_constraintTop_toBottomOf="@+id/label1_espacio" />
 
     <Button
-        android:id="@+id/button2_espacio"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:background="#504F4F"
-        android:text="Mis vehículos"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button1_espacio" />
-
-    <Button
         android:id="@+id/button3_espacio"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
         android:background="#504F4F"
         android:text="Historial de transacciones"
         android:textColor="#FFFFFF"
@@ -76,7 +56,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2_espacio" />
+        app:layout_constraintTop_toBottomOf="@+id/button1_espacio" />
 
     <Button
         android:id="@+id/button4_espacio"

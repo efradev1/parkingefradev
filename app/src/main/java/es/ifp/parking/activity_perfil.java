@@ -31,8 +31,6 @@ public class activity_perfil extends AppCompatActivity {
 
     protected ImageView imageView1;
 
-    //private activity_modificar_perfil activity_modificar_perfil;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,9 +47,8 @@ public class activity_perfil extends AppCompatActivity {
         button2=(Button) findViewById(R.id.button2_perfil);
         button3=(Button) findViewById(R.id.button3_perfil);
         imageView1=(ImageView) findViewById(R.id.imageView1_perfil);
-        bdu = new BaseDatosUsuario(this);
 
-        //activity_modificar_perfil = new activity_modificar_perfil();
+        bdu = new BaseDatosUsuario(this);
 
         SharedPreferences preferences = getSharedPreferences("usuario_info", Context.MODE_PRIVATE);
         String email = preferences.getString("email", "");
