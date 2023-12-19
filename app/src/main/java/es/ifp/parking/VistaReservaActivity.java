@@ -21,13 +21,9 @@ public class VistaReservaActivity extends AppCompatActivity {
 
     //Declaracion de los componentes
     protected TextView label1;
-    protected Button boton2;
-    protected Button boton3;
     protected Button boton4;
     protected Button boton5;
     protected Button boton6;
-
-    private BaseDatosReservas bdr;
     private Intent pasarPantalla;
     private Bundle bundle;
 
