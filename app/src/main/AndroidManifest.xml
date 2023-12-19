@@ -47,7 +47,24 @@
         <activity
             android:name=".VistaReservaActivity"
             android:exported="false" />
+        <activity
+            android:name=".activity_ayuda"
+            android:exported="false" />
+        <activity
+            android:name=".activity_mi_espacio"
+            android:exported="false" />
+        <activity
+            android:name=".activity_mis_vehiculos"
+            android:exported="false" />
+        <activity
+            android:name=".activity_perfil"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".StartActivity"
             android:exported="true">

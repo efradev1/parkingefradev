@@ -150,7 +150,7 @@ public class BaseDatosVentas extends SQLiteOpenHelper {
             res.moveToFirst();
             while (res.isAfterLast() == false) {
 
-                contenido =res.getString(res.getColumnIndex("-id_venta"))+"\n"
+                contenido =res.getString(res.getColumnIndex("id_venta"))+"-"+"\n"
                         + res.getString(res.getColumnIndex("fecha"))+"-"+res.getString(res.getColumnIndex("hora"))+"\n"
                         +res.getDouble(res.getColumnIndex("latitud"))+"-"+res.getDouble(res.getColumnIndex("longitud"))+"\n"
                         +res.getString(res.getColumnIndex("detalles"));
