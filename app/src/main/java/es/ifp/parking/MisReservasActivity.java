@@ -49,9 +49,10 @@ public class MisReservasActivity extends AppCompatActivity {
         listaV = (ListView) findViewById(R.id.list_ventas);
 
         dbr= new BaseDatosReservas(this );
+        dbv= new BaseDatosVentas(this);
 
         listadoReservas = dbr.getAllReservas();
-        listadoVentas = dbv.getAllReservas();
+        listadoVentas = dbv.getAllVentas();
 
         adaptador = new ArrayAdapter<>(MisReservasActivity.this, android.R.layout.simple_list_item_1, listadoReservas);
         listaR.setAdapter(adaptador);
@@ -91,9 +92,9 @@ public class MisReservasActivity extends AppCompatActivity {
                 contenidoItem = parent.getItemAtPosition(position).toString();
                 partes=contenidoItem.split("-");
                 if (partes.length>1) {
-                    UnaReserva r = dbr.getReserva(Integer.parseInt(partes[0]));
+                    UnaVenta v = dbv.getVenta(Integer.parseInt(partes[0]));
 
-                    if (r != null) {
+                    if (v != null) {
                         int identificador = Integer.parseInt(partes[0]);
                         pasarPantalla = new Intent(MisReservasActivity.this, VistaVenta.class);
                         pasarPantalla.putExtra("id_reserva", contenidoItem);
