@@ -22,17 +22,20 @@ public class BaseDatosVentas extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        // Crear la tabla "venta" con sus columnas
         db.execSQL("CREATE table venta(id_venta integer primary key autoincrement not null,id_usuario integer, fecha text,hora text, latitud real, longitud real, detalles text, FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario))");
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Eliminar la tabla si existe al actualizar la base de datos
         db.execSQL("DROP TABLE IF EXISTS venta");
 
     }
 
     public void insertVenta(int id_usuario, String fecha, String hora, double latitud, double longitud, String detalles){
+        // Insertar una nueva venta en la base de datos
 
         db=this.getReadableDatabase();
         db.execSQL("INSERT INTO venta(id_usuario, fecha, hora, latitud, longitud, detalles) " +
@@ -41,11 +44,13 @@ public class BaseDatosVentas extends SQLiteOpenHelper {
     }
 
     public void deleteVenta(int id_venta){
+        // Eliminar una venta de la base de datos por su ID
         db=this.getWritableDatabase();
         db.execSQL("DELETE FROM venta WHERE id_venta=" +id_venta);
         db.close();
     }
     public int numVentas(){
+        // Obtener el número total de ventas en la base de datos
 
         int num=0;
         db=this.getReadableDatabase();
@@ -56,6 +61,7 @@ public class BaseDatosVentas extends SQLiteOpenHelper {
 
     @SuppressLint("Range")
     public UnaVenta getVenta(int id_venta){
+        // Obtener información de una venta por su ID
         UnaVenta v= null;
         Cursor res= null;
         db= this.getReadableDatabase();
@@ -84,6 +90,7 @@ public class BaseDatosVentas extends SQLiteOpenHelper {
 
 
     public List<UnaVenta> obtenerTodasLasVentas(){
+        // Obtener todas las ventas de la base de datos
 
         List<UnaVenta> ventas = new ArrayList<>();
         db= this.getReadableDatabase();
@@ -106,6 +113,7 @@ public class BaseDatosVentas extends SQLiteOpenHelper {
     }
     @SuppressLint("Range")
     public int obtenerIdVenta(double latitud, double longitud) {
+        // Obtener el ID de una venta por sus coordenadas
         int idVenta = -1;
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -131,6 +139,7 @@ public class BaseDatosVentas extends SQLiteOpenHelper {
 
     @SuppressLint("Range")
     public ArrayList<String> getAllVentas(){
+        // Obtener información de todas las ventas
 
 
             ArrayList<String> listaVentas=new ArrayList<String>();
@@ -158,6 +167,7 @@ public class BaseDatosVentas extends SQLiteOpenHelper {
 
     @SuppressLint("Range")
     public ArrayList<String> getAllVentasSimple(){
+        // Obtener información simplificada de todas las ventas
 
         ArrayList<String> listaVentas=new ArrayList<String>();
         String contenido="";

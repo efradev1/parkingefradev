@@ -60,6 +60,8 @@ public class DetallesVentaActivity extends AppCompatActivity {
         guardar=findViewById(R.id.botonGuardar_DetallesVentanaActivity);
         db= new BaseDatosVentas(this );
         bd= new BaseDatosUsuario(this);
+
+        // Obtener la información de la intención (intent)
         Intent intent= getIntent();
         if(intent != null){
             double latitud= intent.getDoubleExtra("latitud",0.0);
@@ -69,13 +71,15 @@ public class DetallesVentaActivity extends AppCompatActivity {
             latitudEditText.setText(String.valueOf(latitud));
             longitudEditText.setText(String.valueOf(longitud));
         }
+        // Deshabilitar la edición de las coordenadas
         latitudEditText.setEnabled(false);
         longitudEditText.setEnabled(false);
 
-
+        // Configuración del botón "Guardar"
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Validar la fecha y hora ingresadas
                 Date fechaActual = new Date();
                 long horaActual = fechaActual.getTime();
 
@@ -84,22 +88,26 @@ public class DetallesVentaActivity extends AppCompatActivity {
 
                 if (fechaUsuario.compareTo(fechaActual) >= 0) {
                     if (horaUsuario > horaActual) {
+                        // Obtener la información ingresada
                         contenidoHora = horaEditText.getText().toString();
                         contenidoFecha = fechaEditText.getText().toString();
                         contenidoDetalles = detallesEditText.getText().toString();
+                        // Mostrar el diálogo de confirmación
                         mostrarDialogoConfirmacion();
                     } else {
+                        // Mostrar mensaje de error si la fecha y hora son anteriores a la actual
                         Toast.makeText(DetallesVentaActivity.this, "La fecha y hora deben ser posteriores",
                                 +Toast.LENGTH_LONG).show();
                     }
                 } else {
+                    // Mostrar mensaje de error si la fecha y hora son anteriores a la actual
                     Toast.makeText(DetallesVentaActivity.this, "La fecha y hora deben ser posteriores",
                             +Toast.LENGTH_LONG).show();
                 }
 
             }
         });
-
+        // Configuración del botón "Volver"
         volver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,6 +119,7 @@ public class DetallesVentaActivity extends AppCompatActivity {
         });
 
     }
+    // Método para obtener la fecha y hora ingresadas
     private Date obtenerFechaYHoraIngresadas(){
         String fechaString = fechaEditText.getText().toString();
         String horaString = horaEditText.getText().toString();
@@ -125,6 +134,7 @@ public class DetallesVentaActivity extends AppCompatActivity {
         }
 
     }
+    // Método para obtener la dirección a partir de las coordenadas
     private String obtenerDireccion(double latitud, double longitud){
         String direccionString = "";
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
@@ -146,23 +156,27 @@ public class DetallesVentaActivity extends AppCompatActivity {
 
         return direccionString;
     }
+    // Método para mostrar el diálogo de confirmación
     private void mostrarDialogoConfirmacion() {
         String direccion = obtenerDireccion(contenidoLatitud, contenidoLongitud);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("¿Está seguro que esta es la ubicacion \n"
                 + direccion +"?");
         builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+            // Obtener información del usuario
             public void onClick(DialogInterface dialog, int which) {
                 SharedPreferences preferences = getSharedPreferences("usuario_info", Context.MODE_PRIVATE);
                 String email= preferences.getString("email","");
                 String password=preferences.getString("password","");
                 int id_usuario= bd.obtenerIdUsuario(email,password);
+                // Insertar la venta en la base de datos
                 db.insertVenta(id_usuario,contenidoFecha,contenidoHora,contenidoLatitud,contenidoLongitud,contenidoDetalles);
+                // Mostrar mensaje de éxito
                 Toast toast= Toast.makeText(DetallesVentaActivity.this,"Tu plaza ha sido registrada con éxito." +
                         "Puede ver los detalles en Mis Ventas.",Toast.LENGTH_LONG);
                          toast.setGravity(Gravity.CENTER,0,0);
                          toast.show();
-
+                // Regresar al menú principal
                 Intent pasarPantalla = new Intent(DetallesVentaActivity.this, MenuUsuarioActivity.class);
                 finish();
                 startActivity(pasarPantalla);
