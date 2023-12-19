@@ -1,7 +1,9 @@
 package es.ifp.parking;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
@@ -32,6 +35,8 @@ public class VistaVenta extends AppCompatActivity {
     private String reserva="";
     private String partes[];
     private int identificador = 0;
+
+    private int idReserva;
 
 
 
@@ -61,7 +66,7 @@ public class VistaVenta extends AppCompatActivity {
         }*/
         Intent intent = getIntent();
         if (intent != null) {
-            int idReserva = intent.getIntExtra("id_reserva", 0);
+            idReserva = intent.getIntExtra("id_reserva", 0);
             String fecha = intent.getStringExtra("fecha");
             String hora = intent.getStringExtra("hora");
             double latitud = intent.getDoubleExtra("latitud", 0.0);
@@ -96,18 +101,50 @@ public class VistaVenta extends AppCompatActivity {
 
             }
         });
-                /*CANCELAR LA RESERVA
+                //CANCELAR LA RESERVA
         boton4_venta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                pasarPantalla=new Intent(VistaVenta.this, MisReservasActivity.class);
-                finish();
-                startActivity(pasarPantalla);
 
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        VistaVenta.this);
+
+                // set title
+                alertDialogBuilder.setTitle("Cancelar reserva");
+
+                // set dialog message
+                alertDialogBuilder
+                        .setMessage("¿Está seguro de que quiere cancelar la reserva?")
+                        .setCancelable(false)
+                        .setPositiveButton("Sí",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+
+                           dbv.deleteVenta(idReserva);
+
+                                    Toast.makeText(VistaVenta.this, "Reserva cancelada correctamente", Toast.LENGTH_SHORT).show();
+                                    pasarPantalla = new Intent(VistaVenta.this, MenuUsuarioActivity.class);
+                                    finish();
+                                    startActivity(pasarPantalla);
+
+                                VistaVenta.this.finish();
+                            }
+                        })
+                        .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                // if this button is clicked, just close.
+                                // the dialog box and do nothing
+                                dialog.cancel();
+                            }
+                        });
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
             }
-        });*/
-
+        });
     }
     private String obtenerDireccion(double latitud, double longitud) {
         String direccionString = "";
