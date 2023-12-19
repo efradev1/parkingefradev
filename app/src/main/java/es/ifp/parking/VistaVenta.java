@@ -23,7 +23,6 @@ public class VistaVenta extends AppCompatActivity {
     protected TextView label1_venta;
     protected TextView label2_venta;
     protected TextView label3_venta;
-    protected Button boton3_venta;
     protected Button boton4_venta;
     protected Button boton5_venta;
     protected Button boton6_venta;
@@ -32,9 +31,9 @@ public class VistaVenta extends AppCompatActivity {
     protected BaseDatosVentas dbv;
     private Bundle bundle;
 
-    private String reserva="";
+    /*private String reserva="";
     private String partes[];
-    private int identificador = 0;
+    private int identificador = 0;*/
 
     private int idReserva;
 
@@ -50,8 +49,6 @@ public class VistaVenta extends AppCompatActivity {
         label1_venta=(TextView) findViewById(R.id.label1_venta);
         label2_venta=(TextView) findViewById(R.id.label2_venta);
         label3_venta=(TextView) findViewById(R.id.label3_venta);
-
-        boton3_venta=(Button) findViewById(R.id.boton3_venta);
         boton4_venta=(Button) findViewById(R.id.boton4_venta);
         boton5_venta=(Button) findViewById(R.id.boton5_venta);
         boton6_venta=(Button) findViewById(R.id.boton6_venta);

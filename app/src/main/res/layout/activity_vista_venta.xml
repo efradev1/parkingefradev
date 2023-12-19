@@ -63,27 +63,12 @@
             android:id="@+id/boton4_venta"
             android:layout_width="361dp"
             android:layout_height="43dp"
-            android:layout_marginTop="24dp"
             android:text="Cancelar reserva"
             android:textColor="#070707"
             app:backgroundTint="#EB9683"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/boton3_venta" />
-
-        <Button
-            android:id="@+id/boton3_venta"
-            android:layout_width="363dp"
-            android:layout_height="42dp"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/calistoga"
-            android:text="Finalizar transacción"
-            android:textColor="#070707"
-            app:backgroundTint="#7DC9A0"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.479"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label3_venta" />
+            tools:layout_editor_absoluteY="588dp" />
 
         <TextView
         android:id="@+id/label1_venta"
