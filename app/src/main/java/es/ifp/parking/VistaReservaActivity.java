@@ -140,8 +140,8 @@ public class VistaReservaActivity extends AppCompatActivity {
                         .setPositiveButton("Sí",new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
                                 contenidoLabel = label1.getText().toString();
-                                partes = contenidoLabel.split(".-");
-                                if (partes.length > 1) {
+                                partes = contenidoLabel.split("-");
+                                if (partes.length > 0) {
                                     identificador = Integer.parseInt(partes[0]);
                                     dbr.deleteReserva(identificador);
                                     Toast.makeText(VistaReservaActivity.this, "Reserva cancelada correctamente", Toast.LENGTH_SHORT).show();
