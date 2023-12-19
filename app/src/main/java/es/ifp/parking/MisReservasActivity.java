@@ -72,12 +72,9 @@ public class MisReservasActivity extends AppCompatActivity {
                     if(r!=null) {
                         int identificador = Integer.parseInt(partes[0]);
                         pasarPantalla = new Intent(MisReservasActivity.this, VistaReservaActivity.class);
-                        pasarPantalla.putExtra("id_reserva", contenidoItem);
+                        pasarPantalla.putExtra("id_reserva", identificador);
                         pasarPantalla.putExtra("fecha", contenidoItem);
-                        pasarPantalla.putExtra("hora", contenidoItem);
-                        pasarPantalla.putExtra("latitud", contenidoItem);
-                        pasarPantalla.putExtra("longitud", contenidoItem);
-                        pasarPantalla.putExtra("detalles", contenidoItem);
+
                         finish();
                         startActivity(pasarPantalla);
                     }
@@ -95,14 +92,11 @@ public class MisReservasActivity extends AppCompatActivity {
                     UnaVenta v = dbv.getVenta(Integer.parseInt(partes[0]));
 
                     if (v != null) {
-                        int identificador = Integer.parseInt(partes[0]);
+                      int identificador = Integer.parseInt(partes[0]);
+
                         pasarPantalla = new Intent(MisReservasActivity.this, VistaVenta.class);
-                        pasarPantalla.putExtra("id_reserva", contenidoItem);
+                        pasarPantalla.putExtra("id_venta", identificador);
                         pasarPantalla.putExtra("fecha", contenidoItem);
-                        pasarPantalla.putExtra("hora", contenidoItem);
-                        pasarPantalla.putExtra("latitud", contenidoItem);
-                        pasarPantalla.putExtra("longitud", contenidoItem);
-                        pasarPantalla.putExtra("detalles", contenidoItem);
                         finish();
                         startActivity(pasarPantalla);
                     }

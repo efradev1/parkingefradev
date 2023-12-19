@@ -57,7 +57,7 @@
         <ListView
             android:id="@+id/list_reservas"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="203dp" />
 
     </LinearLayout>
 

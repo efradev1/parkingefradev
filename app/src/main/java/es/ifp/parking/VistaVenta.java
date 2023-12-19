@@ -29,13 +29,16 @@ public class VistaVenta extends AppCompatActivity {
     protected Intent pasarPantalla;
 
     protected BaseDatosVentas dbv;
+    protected UnaVenta reserva;
     private Bundle bundle;
 
-    /*private String reserva="";
-    private String partes[];
+    private String venta="";
+  /*  private String partes[];
     private int identificador = 0;*/
 
-    private int idReserva;
+    private int id_venta;
+    private Double latitud;
+    private Double longitud;
 
 
 
@@ -55,28 +58,22 @@ public class VistaVenta extends AppCompatActivity {
 
         dbv= new BaseDatosVentas(this);
 
-       /* bundle=getIntent().getExtras();
+        bundle=getIntent().getExtras();
 
         if (bundle!=null){
-            reserva=bundle.getString("fecha");
-            label3_venta.setText(reserva);
-        }*/
-        Intent intent = getIntent();
-        if (intent != null) {
-            idReserva = intent.getIntExtra("id_reserva", 0);
-            String fecha = intent.getStringExtra("fecha");
-            String hora = intent.getStringExtra("hora");
-            double latitud = intent.getDoubleExtra("latitud", 0.0);
-            double longitud = intent.getDoubleExtra("longitud", 0.0);
-            String detalles = intent.getStringExtra("detalles");
+            venta=bundle.getString("fecha");
+            id_venta=bundle.getInt("id_venta");
+
+            reserva=dbv.getVenta(id_venta);
+
+            latitud=reserva.getLatitud();
+            longitud=reserva.getLongitud();
 
             String direccion = obtenerDireccion(latitud, longitud);
 
-            label3_venta.setText(fecha + hora + direccion + detalles);
+            label3_venta.setText("Los datos de tu reserva en venta son: "+ "\n" + venta + "\n" +
+                    "La dirección de tu reserva en venta es: "+ "\n" + direccion);
         }
-
-
-
 
             boton5_venta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +114,7 @@ public class VistaVenta extends AppCompatActivity {
                         .setPositiveButton("Sí",new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
 
-                           dbv.deleteVenta(idReserva);
+                           dbv.deleteVenta(id_venta);
 
                                     Toast.makeText(VistaVenta.this, "Reserva cancelada correctamente", Toast.LENGTH_SHORT).show();
                                     pasarPantalla = new Intent(VistaVenta.this, MenuUsuarioActivity.class);

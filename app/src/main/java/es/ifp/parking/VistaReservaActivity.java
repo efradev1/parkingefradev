@@ -30,16 +30,14 @@ public class VistaReservaActivity extends AppCompatActivity {
     private BaseDatosReservas bdr;
     private Intent pasarPantalla;
     private Bundle bundle;
-    private String paquete1 = "";
+
     private String paquete2 = "";
-    private String paquete3 = "";
-    private String paquete4 = "";
-    private String paquete5 = "";
-    private String paquete6 = "";
-    private String contenidoLabel = "";
-    private String partes[];
-    private int identificador = 0;
+    private int id_reserva;
+
     protected BaseDatosReservas dbr;
+    protected UnaReserva reserva;
+    private Double latitud;
+    private Double longitud;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,80 +46,31 @@ public class VistaReservaActivity extends AppCompatActivity {
 
         //Referenciar componentes
         label1 = (TextView) findViewById(R.id.vistaReservasTextBox01);
-
-        boton2 = (Button) findViewById(R.id.vistaReservasTextButtonNavi);
-        boton3 = (Button) findViewById(R.id.vistaReservasTextButtonEndTransaction);
         boton4 = (Button) findViewById(R.id.vistaReservasTextButtonCancelTransaction);
         boton5 = (Button) findViewById(R.id.vistaReservaBoton_inicio_reservas);
         boton6 = (Button) findViewById(R.id.vistaReservaBoton_volver_reservas);
+        dbr=new BaseDatosReservas(this);
         bundle=getIntent().getExtras();
 
         //LABEL1
         if (bundle != null) {
-            //paquete1 = bundle.getString("id_reserva");
+
             paquete2 = bundle.getString("fecha");
-            paquete3 = bundle.getString("hora");
-            //paquete4 = bundle.getString("latitud");
-            //paquete5 = bundle.getString("longitud");
-            paquete6 = bundle.getString("detalles");
+            id_reserva = bundle.getInt("id_reserva");
 
-            //Double latitud = Double.parseDouble(paquete4);
-            //Double longitud = Double.parseDouble(paquete5);
-            //+"Dirección: "+obtenerDireccion(latitud, longitud)
+            reserva=dbr.getReserva(id_reserva);
 
-            label1.setText(paquete2);
+            latitud=reserva.getLatitud();
+            longitud=reserva.getLongitud();
+
+            String direccion = obtenerDireccion(latitud, longitud);
+
+            label1.setText("Los datos de tu reserva en venta son: "+ "\n" + paquete2 + "\n" +
+                    "La dirección de tu reserva en venta es: "+ "\n" + direccion);
         }
 
-        //LABEL2
 
 
-
-        //NAVEGACIÓN
-        boton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*Intent pasarPantalla = new Intent(VistaReservaActivity.this, NavegacionActivity.class);
-                finish();
-                startActivity(pasarPantalla);*/
-            }
-        });
-
-        //FINALIZAR TRANSACCION
-        boton3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        VistaReservaActivity.this);
-
-                // set title
-                alertDialogBuilder.setTitle("Finalizar transacción");
-
-                // set dialog message
-                alertDialogBuilder
-                        .setMessage("¿Está seguro de que ha completado su reserva de aparcamiento?")
-                        .setCancelable(false)
-                        .setPositiveButton("Sí",new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                // if this button is clicked, close
-                                // current activity
-                                VistaReservaActivity.this.finish();
-                            }
-                        })
-                        .setNegativeButton("No",new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                // if this button is clicked, just close
-                                // the dialog box and do nothing
-                                dialog.cancel();
-                            }
-                        });
-
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
-
-                // show it
-                alertDialog.show();
-            }
-        });
 
         //CANCELAR RESERVA
         boton4.setOnClickListener(new View.OnClickListener() {
@@ -139,16 +88,13 @@ public class VistaReservaActivity extends AppCompatActivity {
                         .setCancelable(false)
                         .setPositiveButton("Sí",new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
-                                contenidoLabel = label1.getText().toString();
-                                partes = contenidoLabel.split("-");
-                                if (partes.length > 0) {
-                                    identificador = Integer.parseInt(partes[0]);
-                                    dbr.deleteReserva(identificador);
+
+                                dbr.deleteReserva(id_reserva);
                                     Toast.makeText(VistaReservaActivity.this, "Reserva cancelada correctamente", Toast.LENGTH_SHORT).show();
                                     pasarPantalla = new Intent(VistaReservaActivity.this, MenuUsuarioActivity.class);
                                     finish();
                                     startActivity(pasarPantalla);
-                                }
+
                                 VistaReservaActivity.this.finish();
                             }
                         })

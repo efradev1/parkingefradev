@@ -41,7 +41,7 @@ public class BaseDatosReservas extends SQLiteOpenHelper {
 
     public void deleteReserva(int id_reserva){
         db=this.getWritableDatabase();
-        db.execSQL("DELETE FROM venta WHERE id_venta=" +id_reserva);
+        db.execSQL("DELETE FROM reserva WHERE id_reserva=" +id_reserva);
         db.close();
     }
     public int numReservas(){
