@@ -65,9 +65,6 @@ public class VistaReservaActivity extends AppCompatActivity {
                     "La dirección de tu reserva en venta es: "+ "\n" + direccion);
         }
 
-
-
-
         //CANCELAR RESERVA
         boton4.setOnClickListener(new View.OnClickListener() {
             @Override
