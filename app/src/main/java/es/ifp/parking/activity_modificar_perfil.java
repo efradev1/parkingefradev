@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.graphics.Bitmap;
+import android.net.Uri;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -160,6 +162,7 @@ public class activity_modificar_perfil extends AppCompatActivity {
                 openGallery();
             }
         });
+    }
 
         @Override
         protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -179,4 +182,4 @@ public class activity_modificar_perfil extends AppCompatActivity {
         }
     }
 
-    }}
+    }
