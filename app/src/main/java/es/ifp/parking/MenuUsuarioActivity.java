@@ -14,6 +14,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import es.ifp.parking.databinding.ActivityAyudaBinding;
+
 public class MenuUsuarioActivity extends AppCompatActivity {
     protected TextView labelTitulo;
     protected Button botonBuscar;
@@ -75,13 +77,17 @@ public class MenuUsuarioActivity extends AppCompatActivity {
         botonAyuda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent pasarPantalla = new Intent(MenuUsuarioActivity.this, activity_ayuda.class);
+                finish();
+                startActivity(pasarPantalla);
             }
         });
         botonPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent pasarPantalla = new Intent(MenuUsuarioActivity.this, activity_perfil.class);
+                finish();
+                startActivity(pasarPantalla);
             }
         });
         botonAnuncio.setOnClickListener(new View.OnClickListener() {
